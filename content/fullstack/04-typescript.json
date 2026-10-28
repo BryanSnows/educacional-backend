@@ -1,0 +1,578 @@
+{
+  "slug": "typescript",
+  "title": "TypeScript",
+  "description": "JavaScript com tipos e mais segurança",
+  "color": "#3178C6",
+  "icon": "t.square.fill",
+  "lessons": [
+    {
+      "slug": "typescript-1-tipos-basicos",
+      "title": "Tipos básicos",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "multiple_choice",
+          "prompt": "Qual é a anotação correta para uma string?",
+          "options": [
+            "let nome: string = \"Spark\";",
+            "let nome = string \"Spark\";",
+            "let nome<string> = \"Spark\";",
+            "string nome = \"Spark\";"
+          ],
+          "answer": 0,
+          "explanation": "Em TS o tipo vem depois do nome, separado por dois-pontos."
+        },
+        {
+          "type": "true_false",
+          "prompt": "TypeScript infere o tipo de let x = 10 como number.",
+          "answer": true,
+          "explanation": "Sem anotação, o TS infere o tipo pelo valor inicial."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue o tipo a um valor válido",
+          "pairs": [
+            [
+              "number",
+              "42"
+            ],
+            [
+              "string",
+              "\"oi\""
+            ],
+            [
+              "boolean",
+              "true"
+            ],
+            [
+              "string[]",
+              "[\"a\", \"b\"]"
+            ],
+            [
+              "[string, number]",
+              "[\"Ana\", 30]"
+            ]
+          ],
+          "explanation": "[string, number] é uma tupla: tamanho e tipo fixos em cada posição."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Complete os tipos",
+          "code": "let xp: ___ = 120;\nlet ativo: ___ = true;\nlet tags: ___ = [\"html\", \"css\"];",
+          "options": [
+            "number",
+            "boolean",
+            "string[]",
+            "int",
+            "bool",
+            "Array"
+          ],
+          "answer": [
+            "number",
+            "boolean",
+            "string[]"
+          ],
+          "explanation": "TS usa number para todos os números e boolean para verdadeiro/falso; não existem int nem bool."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "O que acontece ao compilar?",
+          "code": "let id: number = 1;\nid = \"abc\";",
+          "options": [
+            "Erro: string não é atribuível a number",
+            "Funciona e id vira \"abc\"",
+            "Erro só em tempo de execução",
+            "id vira NaN"
+          ],
+          "answer": 0,
+          "explanation": "O compilador barra a atribuição antes de o código rodar."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Qual tipo aceita qualquer valor, mas obriga a checar antes de usar?",
+          "answer": [
+            "unknown"
+          ],
+          "explanation": "unknown é a versão segura de any: você precisa estreitar o tipo antes de usar o valor."
+        },
+        {
+          "type": "order",
+          "prompt": "Declare um array de números",
+          "tokens": [
+            "const",
+            "notas",
+            ":",
+            "number[]",
+            "=",
+            "[7, 9]",
+            ";",
+            "Array"
+          ],
+          "answer": [
+            "const",
+            "notas",
+            ":",
+            "number[]",
+            "=",
+            "[7, 9]",
+            ";"
+          ],
+          "explanation": "number[] (ou Array<number>) é o tipo de um array de números."
+        }
+      ]
+    },
+    {
+      "slug": "typescript-2-funcoes",
+      "title": "Tipando funções",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "fill_blank",
+          "prompt": "Tipe os parâmetros e o retorno",
+          "code": "function soma(a: ___, b: number): ___ {\n  return a + b;\n}",
+          "options": [
+            "number",
+            "string",
+            "void",
+            "any"
+          ],
+          "answer": [
+            "number",
+            "number"
+          ],
+          "explanation": "Os parâmetros são números e a soma de números retorna number."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "Qual o tipo de retorno de uma função que não retorna nada?",
+          "options": [
+            "void",
+            "null",
+            "undefined",
+            "never"
+          ],
+          "answer": 0,
+          "explanation": "void indica ausência de retorno; never é para funções que nunca terminam (ex.: sempre lançam erro)."
+        },
+        {
+          "type": "true_false",
+          "prompt": "Chamar soma(1) quando soma exige dois parâmetros gera erro no TS.",
+          "answer": true,
+          "explanation": "O TS confere a quantidade e o tipo dos argumentos em cada chamada."
+        },
+        {
+          "type": "order",
+          "prompt": "Monte uma arrow tipada que dobra um número",
+          "tokens": [
+            "const",
+            "dobro",
+            "=",
+            "(n: number)",
+            ":",
+            "number",
+            "=>",
+            "n * 2",
+            "(n)"
+          ],
+          "answer": [
+            "const",
+            "dobro",
+            "=",
+            "(n: number)",
+            ":",
+            "number",
+            "=>",
+            "n * 2"
+          ],
+          "explanation": "Na arrow, o tipo de retorno vem depois dos parênteses e antes da seta."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue a assinatura ao significado",
+          "pairs": [
+            [
+              "(x?: number)",
+              "Parâmetro opcional"
+            ],
+            [
+              "(x = 10)",
+              "Valor padrão"
+            ],
+            [
+              "(...xs: number[])",
+              "Rest parameters"
+            ],
+            [
+              "(): never",
+              "Nunca retorna"
+            ],
+            [
+              "(): Promise<string>",
+              "Async que resolve string"
+            ]
+          ],
+          "explanation": "Assinaturas tipadas documentam e garantem como a função é usada."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "Por que esse código dá erro?",
+          "code": "const ponto: { x: number; y: number } =\n  { x: 1 };",
+          "options": [
+            "Falta a propriedade y",
+            "x deveria ser string",
+            "Objetos não aceitam tipo inline",
+            "É obrigatório usar interface"
+          ],
+          "answer": 0,
+          "explanation": "O tipo exige x e y; faltando y, o TS acusa propriedade ausente."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Qual tipo envolve o retorno de uma função async?",
+          "code": "async function total(): ___<number> {\n  return 42;\n}",
+          "answer": [
+            "Promise"
+          ],
+          "explanation": "Funções async sempre retornam Promise<T>, aqui Promise<number>."
+        }
+      ]
+    },
+    {
+      "slug": "typescript-3-interfaces",
+      "title": "Interfaces e types",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "fill_blank",
+          "prompt": "Declare o formato do usuário",
+          "code": "___ Usuario {\n  nome: string;\n  xp: number;\n}",
+          "options": [
+            "interface",
+            "type",
+            "struct",
+            "object"
+          ],
+          "answer": [
+            "interface"
+          ],
+          "explanation": "interface Nome { ... } descreve o formato de um objeto; type precisaria de =."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "Como declarar o mesmo formato usando type?",
+          "options": [
+            "type Usuario = { nome: string };",
+            "type Usuario { nome: string }",
+            "type: Usuario = { nome: string }",
+            "typedef Usuario { nome: string }"
+          ],
+          "answer": 0,
+          "explanation": "Um alias de tipo usa type Nome = ...; interface não usa o sinal de igual."
+        },
+        {
+          "type": "true_false",
+          "prompt": "Duas interfaces com o mesmo nome são mescladas em uma só.",
+          "answer": true,
+          "explanation": "Isso se chama declaration merging; com type, repetir o nome gera erro."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue o trecho ao significado",
+          "pairs": [
+            [
+              "email?: string",
+              "Propriedade opcional"
+            ],
+            [
+              "interface B extends A",
+              "Herda as propriedades de A"
+            ],
+            [
+              "[chave: string]: number",
+              "Chaves dinâmicas"
+            ],
+            [
+              "salvar(): void",
+              "Método sem retorno"
+            ]
+          ],
+          "explanation": "Interfaces descrevem propriedades, métodos e até chaves dinâmicas."
+        },
+        {
+          "type": "order",
+          "prompt": "Estenda Pessoa para criar Aluno",
+          "tokens": [
+            "interface",
+            "Aluno",
+            "extends",
+            "Pessoa",
+            "{",
+            "matricula: string;",
+            "}",
+            "implements"
+          ],
+          "answer": [
+            "interface",
+            "Aluno",
+            "extends",
+            "Pessoa",
+            "{",
+            "matricula: string;",
+            "}"
+          ],
+          "explanation": "extends herda as propriedades; implements é usado por classes."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Qual modificador impede reatribuir uma propriedade depois de criada?",
+          "answer": [
+            "readonly"
+          ],
+          "explanation": "readonly id: string permite ler, mas não reatribuir o campo."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "O que um valor do tipo C precisa ter?",
+          "code": "type A = { nome: string };\ntype B = { xp: number };\ntype C = A & B;",
+          "options": [
+            "nome e xp",
+            "nome ou xp",
+            "só nome",
+            "nada, é never"
+          ],
+          "answer": 0,
+          "explanation": "& (interseção) combina os tipos: C exige as propriedades de A e de B."
+        }
+      ]
+    },
+    {
+      "slug": "typescript-4-unions-enums",
+      "title": "Unions, opcionais e enums",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "multiple_choice",
+          "prompt": "Qual tipo aceita string OU number?",
+          "options": [
+            "string | number",
+            "string & number",
+            "string, number",
+            "[string, number]"
+          ],
+          "answer": 0,
+          "explanation": "| cria uma union; & seria uma interseção, e [ ] seria uma tupla."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Complete o tipo literal e uma atribuição válida",
+          "code": "type Status = \"ativo\" ___ \"inativo\";\nlet s: Status = \"ativo\";\ns = ___;",
+          "options": [
+            "|",
+            "&",
+            "\"inativo\"",
+            "\"pausado\"",
+            ","
+          ],
+          "answer": [
+            "|",
+            "\"inativo\""
+          ],
+          "explanation": "Só os literais da union são aceitos; \"pausado\" daria erro."
+        },
+        {
+          "type": "true_false",
+          "prompt": "Com strictNullChecks, user.email.length dá erro se email for opcional.",
+          "answer": true,
+          "explanation": "email pode ser undefined; use user.email?.length ou cheque antes."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue o operador ao uso",
+          "pairs": [
+            [
+              "user?.email",
+              "Encadeamento opcional"
+            ],
+            [
+              "valor!",
+              "Garante que não é null (non-null)"
+            ],
+            [
+              "typeof x === \"string\"",
+              "Estreitamento (narrowing)"
+            ],
+            [
+              "x as string",
+              "Asserção de tipo"
+            ]
+          ],
+          "explanation": "Esses recursos ajudam a lidar com valores que podem ser de mais de um tipo."
+        },
+        {
+          "type": "order",
+          "prompt": "Declare um enum de níveis",
+          "tokens": [
+            "enum",
+            "Nivel",
+            "{",
+            "Facil,",
+            "Medio,",
+            "Dificil",
+            "}",
+            "=",
+            ";"
+          ],
+          "answer": [
+            "enum",
+            "Nivel",
+            "{",
+            "Facil,",
+            "Medio,",
+            "Dificil",
+            "}"
+          ],
+          "explanation": "enum Nome { A, B, C } cria um conjunto nomeado de constantes."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "O que aparece no console?",
+          "code": "enum Cor { Vermelho, Verde, Azul }\nconsole.log(Cor.Verde);",
+          "options": [
+            "1",
+            "0",
+            "\"Verde\"",
+            "2"
+          ],
+          "answer": 0,
+          "explanation": "Enums numéricos começam em 0: Vermelho = 0, Verde = 1, Azul = 2."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Qual operador usa o lado direito só se o esquerdo for null ou undefined?",
+          "code": "const nome = apelido ___ \"Anônimo\";",
+          "answer": [
+            "??"
+          ],
+          "explanation": "?? (nullish coalescing) mantém 0 e \"\", ao contrário de ||."
+        }
+      ]
+    },
+    {
+      "slug": "typescript-5-generics",
+      "title": "Generics e utility types",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "multiple_choice",
+          "prompt": "Qual o tipo inferido de x?",
+          "code": "function primeiro<T>(lista: T[]): T {\n  return lista[0];\n}\nconst x = primeiro([\"a\", \"b\"]);",
+          "options": [
+            "string",
+            "T",
+            "any",
+            "string[]"
+          ],
+          "answer": 0,
+          "explanation": "O TS deduz T = string a partir do argumento, então o retorno é string."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Crie uma função genérica que devolve o próprio valor",
+          "code": "function identidade<___>(valor: T): ___ {\n  return valor;\n}",
+          "options": [
+            "T",
+            "any",
+            "<T>",
+            "unknown"
+          ],
+          "answer": [
+            "T",
+            "T"
+          ],
+          "explanation": "T é declarado entre < > e reutilizado no parâmetro e no retorno."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue o utility type ao resultado",
+          "pairs": [
+            [
+              "Required<T>",
+              "Todas as props obrigatórias"
+            ],
+            [
+              "Pick<T, K>",
+              "Só as chaves K"
+            ],
+            [
+              "Omit<T, K>",
+              "Todas menos as chaves K"
+            ],
+            [
+              "Record<K, V>",
+              "Chaves K com valores V"
+            ],
+            [
+              "ReturnType<F>",
+              "Tipo de retorno da função F"
+            ]
+          ],
+          "explanation": "Utility types transformam tipos existentes sem precisar reescrevê-los."
+        },
+        {
+          "type": "true_false",
+          "prompt": "Readonly<T> impede reatribuir as propriedades de primeiro nível do objeto.",
+          "answer": true,
+          "explanation": "Readonly é raso: objetos aninhados continuam mutáveis."
+        },
+        {
+          "type": "order",
+          "prompt": "Crie um tipo só com o nome de Usuario",
+          "tokens": [
+            "type",
+            "Resumo",
+            "=",
+            "Pick<",
+            "Usuario,",
+            "\"nome\"",
+            ">",
+            ";",
+            "Omit<"
+          ],
+          "answer": [
+            "type",
+            "Resumo",
+            "=",
+            "Pick<",
+            "Usuario,",
+            "\"nome\"",
+            ">",
+            ";"
+          ],
+          "explanation": "Pick<Usuario, \"nome\"> mantém apenas a chave nome."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Qual utility type deixa todas as propriedades opcionais?",
+          "answer": [
+            "Partial",
+            "Partial<T>"
+          ],
+          "explanation": "Partial<T> é útil em atualizações parciais, como num PATCH."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "Qual chamada dá erro de compilação?",
+          "code": "function tamanho<T extends { length: number }>(x: T) {\n  return x.length;\n}",
+          "options": [
+            "tamanho(42)",
+            "tamanho(\"oi\")",
+            "tamanho([1, 2])",
+            "tamanho({ length: 3 })"
+          ],
+          "answer": 0,
+          "explanation": "A restrição extends exige uma propriedade length, e number não tem."
+        }
+      ]
+    }
+  ]
+}

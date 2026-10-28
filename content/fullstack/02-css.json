@@ -1,0 +1,561 @@
+{
+  "slug": "css",
+  "title": "CSS",
+  "description": "Estilo, layout e telas de todo tamanho",
+  "color": "#1572B6",
+  "icon": "paintbrush.fill",
+  "lessons": [
+    {
+      "slug": "css-1-seletores",
+      "title": "Seletores e especificidade",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "multiple_choice",
+          "prompt": "Qual seletor pega os elementos com class=\"card\"?",
+          "options": [
+            ".card",
+            "#card",
+            "card",
+            "*card"
+          ],
+          "answer": 0,
+          "explanation": "O ponto seleciona por classe; # seleciona por id."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue o seletor ao que ele seleciona",
+          "pairs": [
+            [
+              "p",
+              "Todos os parágrafos"
+            ],
+            [
+              ".btn",
+              "Elementos com class=\"btn\""
+            ],
+            [
+              "#menu",
+              "O elemento com id=\"menu\""
+            ],
+            [
+              "nav a",
+              "Links dentro de um nav"
+            ],
+            [
+              "a:hover",
+              "Link com o mouse em cima"
+            ]
+          ],
+          "explanation": "Seletores combinam tag, classe, id, descendência e pseudo-classes."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Pinte de tomato o texto do elemento com esse id",
+          "code": "/* <h1 id=\"titulo\"> */\n___ {\n  ___: tomato;\n}",
+          "options": [
+            "#titulo",
+            ".titulo",
+            "color",
+            "font-color",
+            "titulo"
+          ],
+          "answer": [
+            "#titulo",
+            "color"
+          ],
+          "explanation": "Id usa # no seletor, e a cor do texto é a propriedade color."
+        },
+        {
+          "type": "true_false",
+          "prompt": "Um seletor de id (#x) vence um seletor de classe (.x) na especificidade.",
+          "answer": true,
+          "explanation": "Especificidade: id (1,0,0) > classe (0,1,0) > tag (0,0,1)."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "Qual a cor do texto do parágrafo?",
+          "code": "/* <p class=\"aviso\">Oi</p> */\np { color: blue; }\n.aviso { color: red; }",
+          "options": [
+            "Vermelho",
+            "Azul",
+            "Preto",
+            "Depende do navegador"
+          ],
+          "answer": 0,
+          "explanation": "A classe .aviso é mais específica que a tag p, então red vence."
+        },
+        {
+          "type": "order",
+          "prompt": "Monte a regra que tira o sublinhado dos links",
+          "tokens": [
+            "a",
+            "{",
+            "text-decoration:",
+            "none;",
+            "}",
+            "underline;"
+          ],
+          "answer": [
+            "a",
+            "{",
+            "text-decoration:",
+            "none;",
+            "}"
+          ],
+          "explanation": "text-decoration: none remove o sublinhado padrão dos links."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Qual seletor seleciona todos os elementos da página?",
+          "answer": [
+            "*"
+          ],
+          "explanation": "O seletor universal * casa com qualquer elemento e tem especificidade zero."
+        }
+      ]
+    },
+    {
+      "slug": "css-2-box-model",
+      "title": "Box model e unidades",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "multiple_choice",
+          "prompt": "Do conteúdo para fora, qual é a ordem do box model?",
+          "options": [
+            "content, padding, border, margin",
+            "content, margin, border, padding",
+            "padding, content, border, margin",
+            "border, padding, content, margin"
+          ],
+          "answer": 0,
+          "explanation": "O padding fica entre o conteúdo e a borda; a margin fica do lado de fora da borda."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "Com box-sizing padrão (content-box), qual a largura total?",
+          "code": ".caixa {\n  width: 200px;\n  padding: 10px;\n  border: 5px solid;\n}",
+          "options": [
+            "230px",
+            "200px",
+            "215px",
+            "220px"
+          ],
+          "answer": 0,
+          "explanation": "200 de conteúdo + 10 de padding de cada lado + 5 de borda de cada lado = 230px."
+        },
+        {
+          "type": "true_false",
+          "prompt": "Com box-sizing: border-box, padding e borda ficam dentro da width declarada.",
+          "answer": true,
+          "explanation": "border-box faz a width incluir padding e borda, o que facilita os cálculos de layout."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue a unidade ao que ela usa de referência",
+          "pairs": [
+            [
+              "px",
+              "Pixel, valor fixo"
+            ],
+            [
+              "rem",
+              "Fonte do elemento raiz (html)"
+            ],
+            [
+              "em",
+              "Fonte do próprio elemento"
+            ],
+            [
+              "%",
+              "Tamanho do elemento pai"
+            ],
+            [
+              "vw",
+              "1% da largura da tela"
+            ]
+          ],
+          "explanation": "Unidades relativas como rem e vw ajudam o layout a se adaptar."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Complete o espaço interno e o externo do botão",
+          "code": ".botao {\n  ___: 8px 16px;  /* interno */\n  ___: 0 auto;    /* externo */\n}",
+          "options": [
+            "padding",
+            "margin",
+            "border",
+            "gap",
+            "spacing"
+          ],
+          "answer": [
+            "padding",
+            "margin"
+          ],
+          "explanation": "padding é o espaço interno; margin é o externo (0 auto centraliza blocos com largura definida)."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Qual cor hexadecimal representa o branco? (forma de 6 dígitos ou curta)",
+          "answer": [
+            "#ffffff",
+            "#fff",
+            "ffffff",
+            "fff"
+          ],
+          "explanation": "No hex #RRGGBB, FF em todos os canais dá branco; #fff é a forma curta."
+        },
+        {
+          "type": "order",
+          "prompt": "Monte um vermelho com 50% de opacidade",
+          "tokens": [
+            "rgba(",
+            "255,",
+            "0,",
+            "0,",
+            "0.5",
+            ")",
+            "hsl("
+          ],
+          "answer": [
+            "rgba(",
+            "255,",
+            "0,",
+            "0,",
+            "0.5",
+            ")"
+          ],
+          "explanation": "rgba recebe vermelho, verde, azul (0 a 255) e o alfa de 0 a 1."
+        }
+      ]
+    },
+    {
+      "slug": "css-3-flexbox",
+      "title": "Flexbox",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "multiple_choice",
+          "prompt": "Qual declaração ativa o flexbox num container?",
+          "options": [
+            "display: flex",
+            "flex: 1",
+            "position: flex",
+            "align: flex"
+          ],
+          "answer": 0,
+          "explanation": "display: flex transforma os filhos diretos em itens flex."
+        },
+        {
+          "type": "true_false",
+          "prompt": "Por padrão, flex-direction é row (itens lado a lado).",
+          "answer": true,
+          "explanation": "O padrão é row; use column para empilhar os itens."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue a propriedade ao efeito",
+          "pairs": [
+            [
+              "justify-content",
+              "Alinha no eixo principal"
+            ],
+            [
+              "align-items",
+              "Alinha no eixo cruzado"
+            ],
+            [
+              "flex-direction",
+              "Define o eixo principal"
+            ],
+            [
+              "flex-wrap",
+              "Deixa quebrar linha"
+            ],
+            [
+              "gap",
+              "Espaço entre os itens"
+            ]
+          ],
+          "explanation": "No flexbox tudo gira em torno do eixo principal e do eixo cruzado."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Centralize o conteúdo na horizontal e na vertical",
+          "code": ".centro {\n  display: flex;\n  ___: center;  /* horizontal */\n  ___: center;  /* vertical */\n}",
+          "options": [
+            "justify-content",
+            "align-items",
+            "text-align",
+            "vertical-align",
+            "align-content"
+          ],
+          "answer": [
+            "justify-content",
+            "align-items"
+          ],
+          "explanation": "Com flex-direction row, justify-content alinha na horizontal e align-items na vertical."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "Qual valor de justify-content deixa espaço só ENTRE os itens?",
+          "options": [
+            "space-between",
+            "space-around",
+            "space-evenly",
+            "stretch"
+          ],
+          "answer": 0,
+          "explanation": "space-between cola o primeiro e o último nas bordas; around e evenly também põem espaço nas pontas."
+        },
+        {
+          "type": "order",
+          "prompt": "Empilhe os itens em coluna",
+          "tokens": [
+            "flex-direction",
+            ":",
+            "column",
+            ";",
+            "row",
+            "flex-wrap"
+          ],
+          "answer": [
+            "flex-direction",
+            ":",
+            "column",
+            ";"
+          ],
+          "explanation": "flex-direction: column faz o eixo principal virar vertical."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Que propriedade faz um item crescer e ocupar o espaço livre?",
+          "code": ".item {\n  ___: 1;\n}",
+          "answer": [
+            "flex",
+            "flex-grow",
+            "flex: 1",
+            "flex-grow: 1"
+          ],
+          "explanation": "flex: 1 (ou flex-grow: 1) distribui o espaço sobrando entre os itens."
+        }
+      ]
+    },
+    {
+      "slug": "css-4-grid",
+      "title": "Grid",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "multiple_choice",
+          "prompt": "Qual propriedade define as colunas de um grid?",
+          "options": [
+            "grid-template-columns",
+            "grid-columns",
+            "columns-template",
+            "grid-column"
+          ],
+          "answer": 0,
+          "explanation": "grid-template-columns fica no container; grid-column posiciona um item."
+        },
+        {
+          "type": "true_false",
+          "prompt": "Flexbox é unidimensional e grid é bidimensional (linhas e colunas).",
+          "answer": true,
+          "explanation": "Flexbox organiza em um eixo por vez; grid controla linhas e colunas ao mesmo tempo."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Crie uma galeria com 3 colunas iguais",
+          "code": ".galeria {\n  display: ___;\n  grid-template-columns: ___(3, 1fr);\n  gap: 16px;\n}",
+          "options": [
+            "grid",
+            "flex",
+            "repeat",
+            "times",
+            "block"
+          ],
+          "answer": [
+            "grid",
+            "repeat"
+          ],
+          "explanation": "repeat(3, 1fr) é o mesmo que 1fr 1fr 1fr."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "Num container de 600px sem gap, qual a largura de cada coluna 1fr?",
+          "code": "grid-template-columns: 200px 1fr 1fr;",
+          "options": [
+            "200px",
+            "300px",
+            "400px",
+            "100px"
+          ],
+          "answer": 0,
+          "explanation": "Sobram 600 − 200 = 400px, divididos em 2 frações de 200px."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue a propriedade ao efeito",
+          "pairs": [
+            [
+              "grid-template-columns",
+              "Define as colunas"
+            ],
+            [
+              "gap",
+              "Espaço entre as células"
+            ],
+            [
+              "grid-column: 1 / 3",
+              "Item vai da linha 1 à 3"
+            ],
+            [
+              "grid-template-areas",
+              "Nomeia regiões do layout"
+            ]
+          ],
+          "explanation": "O container define a malha e cada item pode escolher onde se encaixar."
+        },
+        {
+          "type": "order",
+          "prompt": "Faça o item ocupar da linha 1 até a linha 3",
+          "tokens": [
+            "grid-column:",
+            "1",
+            "/",
+            "3",
+            ";",
+            "-",
+            "span"
+          ],
+          "answer": [
+            "grid-column:",
+            "1",
+            "/",
+            "3",
+            ";"
+          ],
+          "explanation": "grid-column: início / fim usa as linhas do grid, então 1 / 3 ocupa duas colunas."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Qual unidade do grid divide o espaço livre em frações?",
+          "answer": [
+            "fr"
+          ],
+          "explanation": "fr significa fração do espaço disponível depois dos tamanhos fixos."
+        }
+      ]
+    },
+    {
+      "slug": "css-5-responsivo",
+      "title": "Responsividade",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "multiple_choice",
+          "prompt": "Qual regra aplica estilos só em telas de até 600px?",
+          "options": [
+            "@media (max-width: 600px)",
+            "@media (min-width: 600px)",
+            "@screen 600px",
+            "@media (width > 600)"
+          ],
+          "answer": 0,
+          "explanation": "max-width vale até aquela largura; min-width vale a partir dela."
+        },
+        {
+          "type": "true_false",
+          "prompt": "Mobile-first é escrever o estilo base para telas pequenas e usar min-width para ampliar.",
+          "answer": true,
+          "explanation": "Começar pelo celular e ampliar com min-width costuma gerar CSS mais simples."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Complete a meta tag que faz a página respeitar a largura do celular",
+          "code": "<meta name=\"___\"\n  content=\"width=___, initial-scale=1\">",
+          "options": [
+            "viewport",
+            "device-width",
+            "screen",
+            "100%",
+            "mobile"
+          ],
+          "answer": [
+            "viewport",
+            "device-width"
+          ],
+          "explanation": "Sem a meta viewport, o celular finge ser uma tela larga e diminui tudo."
+        },
+        {
+          "type": "order",
+          "prompt": "Mostre o menu em flex a partir de 768px",
+          "tokens": [
+            "@media",
+            "(min-width: 768px)",
+            "{",
+            ".menu { display: flex; }",
+            "}",
+            "(max-width)"
+          ],
+          "answer": [
+            "@media",
+            "(min-width: 768px)",
+            "{",
+            ".menu { display: flex; }",
+            "}"
+          ],
+          "explanation": "As regras dentro do @media só valem quando a condição é verdadeira."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue a técnica ao efeito",
+          "pairs": [
+            [
+              "img { max-width: 100% }",
+              "Imagem não estoura o container"
+            ],
+            [
+              "@media (min-width: ...)",
+              "Amplia o layout (mobile-first)"
+            ],
+            [
+              "@media print",
+              "Estilos para impressão"
+            ],
+            [
+              "width: 50vw",
+              "Metade da largura da tela"
+            ]
+          ],
+          "explanation": "Responsividade combina unidades fluidas, mídias e imagens flexíveis."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Qual função CSS limita um valor entre um mínimo e um máximo?",
+          "code": "font-size: ___(1rem, 4vw, 2rem);",
+          "answer": [
+            "clamp",
+            "clamp()"
+          ],
+          "explanation": "clamp(mínimo, ideal, máximo) cria tamanhos fluidos com limites."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "Numa tela de 1200px, qual a largura do .card?",
+          "code": ".card { width: 100%; }\n@media (min-width: 900px) {\n  .card { width: 50%; }\n}",
+          "options": [
+            "50%",
+            "100%",
+            "900px",
+            "1200px"
+          ],
+          "answer": 0,
+          "explanation": "1200px ≥ 900px, então a regra do @media sobrescreve e o card fica com 50%."
+        }
+      ]
+    }
+  ]
+}

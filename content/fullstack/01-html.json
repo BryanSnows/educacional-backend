@@ -1,0 +1,548 @@
+{
+  "slug": "html",
+  "title": "HTML",
+  "description": "A estrutura de toda página web",
+  "color": "#E44D26",
+  "icon": "chevron.left.forwardslash.chevron.right",
+  "lessons": [
+    {
+      "slug": "html-1-estrutura",
+      "title": "Estrutura e texto",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "multiple_choice",
+          "prompt": "O que vem na primeira linha de um documento HTML5?",
+          "options": [
+            "<!DOCTYPE html>",
+            "<html5>",
+            "<?xml version=\"1.0\"?>",
+            "<head>"
+          ],
+          "answer": 0,
+          "explanation": "<!DOCTYPE html> avisa ao navegador que a página segue o padrão HTML5."
+        },
+        {
+          "type": "true_false",
+          "prompt": "O conteúdo dentro de <head> aparece no corpo da página.",
+          "answer": false,
+          "explanation": "<head> guarda metadados como título, charset e CSS; o que aparece na tela fica no <body>."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Complete a estrutura básica da página",
+          "code": "<!DOCTYPE html>\n<html lang=\"pt-BR\">\n  <___>\n    <title>Spark</title>\n  </head>\n  <___>Olá!</body>\n</html>",
+          "options": [
+            "head",
+            "body",
+            "header",
+            "main",
+            "footer"
+          ],
+          "answer": [
+            "head",
+            "body"
+          ],
+          "explanation": "<head> traz os metadados e <body> o conteúdo visível. <header> é outra coisa: um cabeçalho dentro do body."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue a tag à sua função",
+          "pairs": [
+            [
+              "<html>",
+              "Raiz do documento"
+            ],
+            [
+              "<head>",
+              "Metadados da página"
+            ],
+            [
+              "<body>",
+              "Conteúdo visível"
+            ],
+            [
+              "<title>",
+              "Texto da aba"
+            ]
+          ],
+          "explanation": "Toda página tem <html> como raiz, com <head> e <body> dentro dele."
+        },
+        {
+          "type": "order",
+          "prompt": "Monte um parágrafo com uma palavra enfatizada",
+          "tokens": [
+            "<p>",
+            "Eu",
+            "<em>",
+            "amo",
+            "</em>",
+            "HTML",
+            "</p>",
+            "<strong>"
+          ],
+          "answer": [
+            "<p>",
+            "Eu",
+            "<em>",
+            "amo",
+            "</em>",
+            "HTML",
+            "</p>"
+          ],
+          "explanation": "<em> marca ênfase dentro do parágrafo e precisa ser fechado antes do </p>."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Qual atributo da tag <html> informa o idioma da página?",
+          "answer": [
+            "lang"
+          ],
+          "explanation": "O atributo lang (ex.: lang=\"pt-BR\") ajuda leitores de tela e tradutores."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "Qual tag marca um texto como importante (com significado)?",
+          "options": [
+            "<strong>",
+            "<b>",
+            "<big>",
+            "<mark>"
+          ],
+          "answer": 0,
+          "explanation": "<strong> indica importância; <b> só deixa o texto em negrito, sem significado extra."
+        }
+      ]
+    },
+    {
+      "slug": "html-2-links-imagens",
+      "title": "Links e imagens",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "multiple_choice",
+          "prompt": "Qual atributo define o destino de um link?",
+          "options": [
+            "href",
+            "src",
+            "link",
+            "target"
+          ],
+          "answer": 0,
+          "explanation": "href (hypertext reference) diz para onde o <a> leva; target diz onde abrir."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Complete a imagem com caminho e texto alternativo",
+          "code": "<img ___=\"spark.png\" ___=\"Robô Spark\">",
+          "options": [
+            "src",
+            "alt",
+            "href",
+            "title",
+            "link"
+          ],
+          "answer": [
+            "src",
+            "alt"
+          ],
+          "explanation": "src aponta o arquivo da imagem e alt descreve o conteúdo dela."
+        },
+        {
+          "type": "true_false",
+          "prompt": "O atributo alt ajuda leitores de tela a descrever a imagem.",
+          "answer": true,
+          "explanation": "Leitores de tela leem o alt; ele também aparece se a imagem não carregar."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue o atributo ao efeito",
+          "pairs": [
+            [
+              "target=\"_blank\"",
+              "Abre em nova aba"
+            ],
+            [
+              "href=\"#contato\"",
+              "Vai até o id=\"contato\""
+            ],
+            [
+              "href=\"mailto:a@b.com\"",
+              "Abre o app de e-mail"
+            ],
+            [
+              "href=\"tel:+5592...\"",
+              "Inicia uma ligação"
+            ]
+          ],
+          "explanation": "O valor de href muda o comportamento do link: âncora, e-mail, telefone ou página."
+        },
+        {
+          "type": "order",
+          "prompt": "Monte um link para a página de cursos",
+          "tokens": [
+            "<a",
+            "href=\"/cursos\"",
+            ">",
+            "Cursos",
+            "</a>",
+            "src=\"/cursos\""
+          ],
+          "answer": [
+            "<a",
+            "href=\"/cursos\"",
+            ">",
+            "Cursos",
+            "</a>"
+          ],
+          "explanation": "Links usam <a> com href; src é usado em imagens e scripts."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Que valor de target abre o link em uma nova aba?",
+          "answer": [
+            "_blank"
+          ],
+          "explanation": "target=\"_blank\" abre em nova aba; combine com rel=\"noopener\" por segurança."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "Esse link usa que tipo de caminho?",
+          "code": "<a href=\"sobre.html\">Sobre</a>",
+          "options": [
+            "Relativo",
+            "Absoluto",
+            "Âncora",
+            "Protocolo"
+          ],
+          "answer": 0,
+          "explanation": "Sem protocolo e domínio, o caminho é relativo à página atual."
+        }
+      ]
+    },
+    {
+      "slug": "html-3-listas-tabelas",
+      "title": "Listas e tabelas",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "multiple_choice",
+          "prompt": "Qual tag cria uma lista numerada?",
+          "options": [
+            "<ol>",
+            "<ul>",
+            "<li>",
+            "<dl>"
+          ],
+          "answer": 0,
+          "explanation": "<ol> é ordered list (numerada); <ul> é lista com marcadores."
+        },
+        {
+          "type": "true_false",
+          "prompt": "Os itens de <ul> e <ol> usam a tag <li>.",
+          "answer": true,
+          "explanation": "<li> (list item) é o item de qualquer lista ordenada ou não ordenada."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Complete com célula de cabeçalho e célula de dados",
+          "code": "<table>\n  <tr>\n    <___>Nome</th>\n  </tr>\n  <tr>\n    <___>Spark</td>\n  </tr>\n</table>",
+          "options": [
+            "th",
+            "td",
+            "tr",
+            "li"
+          ],
+          "answer": [
+            "th",
+            "td"
+          ],
+          "explanation": "<th> é célula de cabeçalho e <td> é célula de dados, ambas dentro de <tr>."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue a tag da tabela ao papel",
+          "pairs": [
+            [
+              "<table>",
+              "A tabela inteira"
+            ],
+            [
+              "<tr>",
+              "Uma linha"
+            ],
+            [
+              "<th>",
+              "Célula de cabeçalho"
+            ],
+            [
+              "<td>",
+              "Célula de dados"
+            ]
+          ],
+          "explanation": "Tabelas são montadas linha a linha (<tr>), com células <th> ou <td>."
+        },
+        {
+          "type": "order",
+          "prompt": "Monte uma lista com marcadores com HTML e CSS",
+          "tokens": [
+            "<ul>",
+            "<li>",
+            "HTML",
+            "</li>",
+            "<li>",
+            "CSS",
+            "</li>",
+            "</ul>",
+            "<ol>"
+          ],
+          "answer": [
+            "<ul>",
+            "<li>",
+            "HTML",
+            "</li>",
+            "<li>",
+            "CSS",
+            "</li>",
+            "</ul>"
+          ],
+          "explanation": "Cada item vai em seu próprio <li>, todos dentro do <ul>."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Qual atributo faz uma célula ocupar mais de uma coluna?",
+          "answer": [
+            "colspan"
+          ],
+          "explanation": "colspan=\"2\" faz a célula se estender por duas colunas; rowspan faz o mesmo com linhas."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "Qual tag agrupa as linhas de cabeçalho de uma tabela?",
+          "options": [
+            "<thead>",
+            "<th>",
+            "<header>",
+            "<caption>"
+          ],
+          "answer": 0,
+          "explanation": "<thead> agrupa as linhas de cabeçalho; <caption> é o título da tabela."
+        }
+      ]
+    },
+    {
+      "slug": "html-4-formularios",
+      "title": "Formulários",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "multiple_choice",
+          "prompt": "Qual tipo de input esconde o que é digitado?",
+          "options": [
+            "password",
+            "hidden",
+            "secret",
+            "text"
+          ],
+          "answer": 0,
+          "explanation": "type=\"password\" mascara os caracteres; type=\"hidden\" nem aparece na tela."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Ligue o rótulo ao campo",
+          "code": "<___ for=\"email\">E-mail</label>\n<input ___=\"email\" type=\"email\">",
+          "options": [
+            "label",
+            "id",
+            "name",
+            "span",
+            "for"
+          ],
+          "answer": [
+            "label",
+            "id"
+          ],
+          "explanation": "O for do <label> aponta para o id do input; clicar no rótulo foca o campo."
+        },
+        {
+          "type": "true_false",
+          "prompt": "Um campo com required impede o envio do formulário se estiver vazio.",
+          "answer": true,
+          "explanation": "required ativa a validação nativa do navegador antes do submit."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue o type do input ao uso",
+          "pairs": [
+            [
+              "type=\"checkbox\"",
+              "Várias escolhas"
+            ],
+            [
+              "type=\"radio\"",
+              "Uma escolha no grupo"
+            ],
+            [
+              "type=\"date\"",
+              "Seletor de data"
+            ],
+            [
+              "type=\"submit\"",
+              "Envia o formulário"
+            ]
+          ],
+          "explanation": "O atributo type muda o controle exibido e a validação do campo."
+        },
+        {
+          "type": "order",
+          "prompt": "Monte o botão que envia o formulário",
+          "tokens": [
+            "<button",
+            "type=\"submit\"",
+            ">",
+            "Entrar",
+            "</button>",
+            "<input"
+          ],
+          "answer": [
+            "<button",
+            "type=\"submit\"",
+            ">",
+            "Entrar",
+            "</button>"
+          ],
+          "explanation": "Um <button type=\"submit\"> dentro do <form> dispara o envio."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Qual atributo mostra um texto de exemplo que some ao digitar?",
+          "answer": [
+            "placeholder"
+          ],
+          "explanation": "placeholder é só uma dica; ele não substitui o <label>."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "Qual atributo do <form> define o método HTTP do envio?",
+          "options": [
+            "method",
+            "action",
+            "type",
+            "verb"
+          ],
+          "answer": 0,
+          "explanation": "method (get ou post) define o verbo; action define a URL de destino."
+        }
+      ]
+    },
+    {
+      "slug": "html-5-semantica",
+      "title": "Semântica e acessibilidade",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "multiple_choice",
+          "prompt": "Qual tag representa o conteúdo principal e único da página?",
+          "options": [
+            "<main>",
+            "<section>",
+            "<div>",
+            "<body>"
+          ],
+          "answer": 0,
+          "explanation": "<main> marca o conteúdo central; deve existir só um visível por página."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue a tag semântica ao significado",
+          "pairs": [
+            [
+              "<header>",
+              "Cabeçalho ou introdução"
+            ],
+            [
+              "<nav>",
+              "Links de navegação"
+            ],
+            [
+              "<article>",
+              "Conteúdo independente"
+            ],
+            [
+              "<aside>",
+              "Conteúdo complementar"
+            ],
+            [
+              "<footer>",
+              "Rodapé"
+            ]
+          ],
+          "explanation": "Tags semânticas descrevem o papel do conteúdo para navegadores, buscadores e leitores de tela."
+        },
+        {
+          "type": "true_false",
+          "prompt": "<div> e <section> têm o mesmo significado semântico.",
+          "answer": false,
+          "explanation": "<div> não tem significado; <section> agrupa uma seção temática, normalmente com título."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Use a tag semântica para o menu",
+          "code": "<___>\n  <a href=\"/\">Início</a>\n  <a href=\"/cursos\">Cursos</a>\n</___>",
+          "options": [
+            "nav",
+            "navbar",
+            "links",
+            "aside"
+          ],
+          "answer": [
+            "nav",
+            "nav"
+          ],
+          "explanation": "<nav> indica um bloco de navegação principal, que leitores de tela conseguem pular ou achar."
+        },
+        {
+          "type": "order",
+          "prompt": "Monte um botão de ícone acessível",
+          "tokens": [
+            "<button",
+            "aria-label=\"Fechar\"",
+            ">",
+            "✕",
+            "</button>",
+            "alt=\"Fechar\""
+          ],
+          "answer": [
+            "<button",
+            "aria-label=\"Fechar\"",
+            ">",
+            "✕",
+            "</button>"
+          ],
+          "explanation": "Sem texto visível, aria-label dá um nome ao botão; alt só vale para imagens."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Qual atributo dá nome acessível a um elemento sem texto visível?",
+          "answer": [
+            "aria-label"
+          ],
+          "explanation": "aria-label é lido pelo leitor de tela no lugar do conteúdo visual."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "O que o alt vazio indica nessa imagem?",
+          "code": "<img src=\"decoracao.png\" alt=\"\">",
+          "options": [
+            "É decorativa e o leitor de tela a ignora",
+            "É um erro de HTML",
+            "A imagem não vai carregar",
+            "O alt vira o nome do arquivo"
+          ],
+          "answer": 0,
+          "explanation": "alt=\"\" sinaliza imagem decorativa; omitir o alt faz alguns leitores lerem o nome do arquivo."
+        }
+      ]
+    }
+  ]
+}

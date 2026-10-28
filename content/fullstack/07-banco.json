@@ -1,0 +1,550 @@
+{
+  "slug": "banco",
+  "title": "Banco de dados",
+  "description": "PostgreSQL, SQL e TypeORM",
+  "color": "#336791",
+  "icon": "cylinder.split.1x2.fill",
+  "lessons": [
+    {
+      "slug": "banco-1-tabelas",
+      "title": "Tabelas, tipos e chaves",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "multiple_choice",
+          "prompt": "O que é uma chave primária?",
+          "options": [
+            "Coluna(s) que identifica cada linha de forma única",
+            "Coluna que aponta para outra tabela",
+            "A senha de acesso ao banco",
+            "Sempre a primeira coluna"
+          ],
+          "answer": 0,
+          "explanation": "A PK não pode ser nula nem repetida; é por ela que referenciamos a linha."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue o tipo PostgreSQL ao uso",
+          "pairs": [
+            [
+              "INTEGER",
+              "Números inteiros"
+            ],
+            [
+              "TEXT",
+              "Texto sem limite fixo"
+            ],
+            [
+              "BOOLEAN",
+              "Verdadeiro ou falso"
+            ],
+            [
+              "TIMESTAMPTZ",
+              "Data e hora com fuso"
+            ],
+            [
+              "UUID",
+              "Identificador único global"
+            ]
+          ],
+          "explanation": "Escolher o tipo certo garante validação e economia de espaço."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Complete a tabela",
+          "code": "CREATE TABLE alunos (\n  id BIGINT GENERATED ALWAYS AS IDENTITY ___ KEY,\n  nome TEXT ___ NULL,\n  email TEXT UNIQUE\n);",
+          "options": [
+            "PRIMARY",
+            "NOT",
+            "FOREIGN",
+            "IS"
+          ],
+          "answer": [
+            "PRIMARY",
+            "NOT"
+          ],
+          "explanation": "IDENTITY gera o id automaticamente e NOT NULL torna o nome obrigatório."
+        },
+        {
+          "type": "true_false",
+          "prompt": "Uma FOREIGN KEY garante que o valor exista na tabela referenciada.",
+          "answer": true,
+          "explanation": "É a integridade referencial: o banco recusa um aluno_id que não existe em alunos."
+        },
+        {
+          "type": "order",
+          "prompt": "Monte a criação da tabela cursos",
+          "tokens": [
+            "CREATE TABLE",
+            "cursos",
+            "(",
+            "id SERIAL PRIMARY KEY,",
+            "titulo TEXT NOT NULL",
+            ");",
+            "DROP TABLE"
+          ],
+          "answer": [
+            "CREATE TABLE",
+            "cursos",
+            "(",
+            "id SERIAL PRIMARY KEY,",
+            "titulo TEXT NOT NULL",
+            ");"
+          ],
+          "explanation": "As colunas vão entre parênteses, separadas por vírgula."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "Qual tipo é o melhor para valores em dinheiro?",
+          "options": [
+            "NUMERIC(10,2)",
+            "REAL",
+            "DOUBLE PRECISION",
+            "TEXT"
+          ],
+          "answer": 0,
+          "explanation": "NUMERIC é exato; tipos de ponto flutuante podem arredondar centavos."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Qual restrição impede valores repetidos numa coluna, como e-mail?",
+          "answer": [
+            "UNIQUE"
+          ],
+          "explanation": "UNIQUE cria um índice que rejeita duplicatas."
+        }
+      ]
+    },
+    {
+      "slug": "banco-2-select",
+      "title": "Consultas com SELECT",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "order",
+          "prompt": "Busque o nome dos alunos ativos",
+          "tokens": [
+            "SELECT",
+            "nome",
+            "FROM",
+            "alunos",
+            "WHERE",
+            "ativo = true",
+            ";",
+            "ORDER"
+          ],
+          "answer": [
+            "SELECT",
+            "nome",
+            "FROM",
+            "alunos",
+            "WHERE",
+            "ativo = true",
+            ";"
+          ],
+          "explanation": "SELECT escolhe colunas, FROM a tabela e WHERE filtra as linhas."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "Como ordenar do mais novo ao mais antigo?",
+          "options": [
+            "ORDER BY criado_em DESC",
+            "ORDER BY criado_em ASC",
+            "SORT BY criado_em DESC",
+            "GROUP BY criado_em"
+          ],
+          "answer": 0,
+          "explanation": "DESC ordena do maior para o menor; para datas, do mais recente ao mais antigo."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Traga as 10 maiores notas a partir de 7",
+          "code": "SELECT nome, nota\nFROM alunos\n___ nota >= 7\nORDER BY nota ___\n___ 10;",
+          "options": [
+            "WHERE",
+            "DESC",
+            "LIMIT",
+            "HAVING",
+            "TOP"
+          ],
+          "answer": [
+            "WHERE",
+            "DESC",
+            "LIMIT"
+          ],
+          "explanation": "No PostgreSQL usamos LIMIT, não TOP, para restringir o número de linhas."
+        },
+        {
+          "type": "true_false",
+          "prompt": "WHERE email = NULL encontra as linhas com e-mail nulo.",
+          "answer": false,
+          "explanation": "Comparar com NULL dá desconhecido; use WHERE email IS NULL."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue o filtro ao significado",
+          "pairs": [
+            [
+              "LIKE 'Ana%'",
+              "Começa com Ana"
+            ],
+            [
+              "IN (1, 2, 3)",
+              "Está na lista"
+            ],
+            [
+              "BETWEEN 1 AND 5",
+              "Faixa com os extremos"
+            ],
+            [
+              "IS NULL",
+              "Sem valor"
+            ]
+          ],
+          "explanation": "Esses operadores deixam o WHERE bem mais expressivo."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "No PostgreSQL, qual busca texto ignorando maiúsculas?",
+          "options": [
+            "ILIKE",
+            "LIKE",
+            "SIMILAR",
+            "MATCH"
+          ],
+          "answer": 0,
+          "explanation": "ILIKE é a versão case-insensitive do LIKE, específica do PostgreSQL."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Qual palavra-chave remove linhas duplicadas do resultado?",
+          "answer": [
+            "DISTINCT",
+            "SELECT DISTINCT"
+          ],
+          "explanation": "SELECT DISTINCT cidade FROM alunos traz cada cidade uma única vez."
+        }
+      ]
+    },
+    {
+      "slug": "banco-3-alterar",
+      "title": "Alterar dados e transações",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "fill_blank",
+          "prompt": "Insira uma aluna",
+          "code": "___ INTO alunos (nome, email)\n___ ('Ana', 'ana@indt.org.br');",
+          "options": [
+            "INSERT",
+            "VALUES",
+            "UPDATE",
+            "SET"
+          ],
+          "answer": [
+            "INSERT",
+            "VALUES"
+          ],
+          "explanation": "INSERT INTO lista as colunas e VALUES traz os valores na mesma ordem."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "O que este comando faz?",
+          "code": "UPDATE alunos SET ativo = false;",
+          "options": [
+            "Desativa TODOS os alunos",
+            "Desativa só o primeiro aluno",
+            "Dá erro por faltar WHERE",
+            "Nada, falta um COMMIT"
+          ],
+          "answer": 0,
+          "explanation": "Sem WHERE, o UPDATE afeta todas as linhas. Confira o filtro antes de rodar!"
+        },
+        {
+          "type": "true_false",
+          "prompt": "Dentro de um BEGIN, o ROLLBACK desfaz as alterações ainda não confirmadas.",
+          "answer": true,
+          "explanation": "Até o COMMIT, nada fica permanente; ROLLBACK volta ao estado anterior."
+        },
+        {
+          "type": "order",
+          "prompt": "Atualize o e-mail do aluno 5",
+          "tokens": [
+            "UPDATE",
+            "alunos",
+            "SET",
+            "email = 'novo@indt.org.br'",
+            "WHERE",
+            "id = 5",
+            ";",
+            "INTO"
+          ],
+          "answer": [
+            "UPDATE",
+            "alunos",
+            "SET",
+            "email = 'novo@indt.org.br'",
+            "WHERE",
+            "id = 5",
+            ";"
+          ],
+          "explanation": "UPDATE tabela SET coluna = valor WHERE filtro."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "Por que usar transação numa transferência entre contas?",
+          "options": [
+            "Para débito e crédito acontecerem juntos ou nenhum",
+            "Para a query ficar mais rápida",
+            "Para criar um índice automático",
+            "Para dispensar o WHERE"
+          ],
+          "answer": 0,
+          "explanation": "Transações são atômicas: ou tudo é confirmado, ou nada é."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue o comando à ação",
+          "pairs": [
+            [
+              "INSERT",
+              "Cria linhas"
+            ],
+            [
+              "UPDATE",
+              "Altera linhas"
+            ],
+            [
+              "DELETE",
+              "Remove linhas"
+            ],
+            [
+              "COMMIT",
+              "Confirma a transação"
+            ]
+          ],
+          "explanation": "INSERT, UPDATE e DELETE alteram dados; COMMIT torna as mudanças definitivas."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Qual palavra do UPDATE define os novos valores?",
+          "answer": [
+            "SET"
+          ],
+          "explanation": "Ex.: UPDATE alunos SET nome = 'Bia' WHERE id = 1;"
+        }
+      ]
+    },
+    {
+      "slug": "banco-4-joins",
+      "title": "JOINs e agregações",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "multiple_choice",
+          "prompt": "O que o INNER JOIN retorna?",
+          "options": [
+            "Só linhas com correspondência nas duas tabelas",
+            "Todas as linhas da tabela da esquerda",
+            "Todas as linhas das duas tabelas",
+            "Sempre o produto cartesiano"
+          ],
+          "answer": 0,
+          "explanation": "Linhas sem par do outro lado ficam de fora; JOIN sozinho é INNER JOIN."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Junte matrículas, alunos e cursos",
+          "code": "SELECT a.nome, c.titulo\nFROM matriculas m\n___ alunos a ___ a.id = m.aluno_id\nJOIN cursos c ON c.id = m.curso_id;",
+          "options": [
+            "JOIN",
+            "ON",
+            "WHERE",
+            "USING"
+          ],
+          "answer": [
+            "JOIN",
+            "ON"
+          ],
+          "explanation": "ON define a condição que liga a chave estrangeira à chave primária."
+        },
+        {
+          "type": "true_false",
+          "prompt": "LEFT JOIN mantém as linhas da esquerda mesmo sem par, com NULL nas colunas da direita.",
+          "answer": true,
+          "explanation": "É útil para achar, por exemplo, cursos sem nenhum aluno."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue o exemplo ao relacionamento",
+          "pairs": [
+            [
+              "Um curso tem muitas aulas",
+              "1:N"
+            ],
+            [
+              "Alunos e cursos via matrículas",
+              "N:N"
+            ],
+            [
+              "Usuário e seu único perfil",
+              "1:1"
+            ]
+          ],
+          "explanation": "N:N sempre precisa de uma tabela intermediária com duas chaves estrangeiras."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "O que esta consulta retorna?",
+          "code": "SELECT curso_id, COUNT(*)\nFROM matriculas\nGROUP BY curso_id;",
+          "options": [
+            "Quantas matrículas cada curso tem",
+            "O total de cursos cadastrados",
+            "As matrículas duplicadas",
+            "Um erro, pois falta WHERE"
+          ],
+          "answer": 0,
+          "explanation": "GROUP BY junta as linhas por curso e COUNT(*) conta cada grupo."
+        },
+        {
+          "type": "order",
+          "prompt": "Liste os cursos com mais de 10 matrículas",
+          "tokens": [
+            "SELECT curso_id, COUNT(*)",
+            "FROM matriculas",
+            "GROUP BY curso_id",
+            "HAVING COUNT(*) > 10",
+            ";",
+            "WHERE COUNT(*) > 10"
+          ],
+          "answer": [
+            "SELECT curso_id, COUNT(*)",
+            "FROM matriculas",
+            "GROUP BY curso_id",
+            "HAVING COUNT(*) > 10",
+            ";"
+          ],
+          "explanation": "WHERE filtra linhas antes de agrupar; HAVING filtra os grupos depois."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Qual cláusula filtra grupos depois do GROUP BY?",
+          "answer": [
+            "HAVING"
+          ],
+          "explanation": "HAVING aceita agregações como COUNT, SUM e AVG na condição."
+        }
+      ]
+    },
+    {
+      "slug": "banco-5-typeorm",
+      "title": "Índices e TypeORM",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "multiple_choice",
+          "prompt": "Para que serve um índice?",
+          "options": [
+            "Acelerar buscas em colunas muito consultadas",
+            "Fazer backup automático",
+            "Criptografar os dados",
+            "Limitar o tamanho da tabela"
+          ],
+          "answer": 0,
+          "explanation": "Como o índice de um livro, ele evita varrer a tabela inteira."
+        },
+        {
+          "type": "true_false",
+          "prompt": "Índices aceleram leituras, mas têm custo extra nas escritas.",
+          "answer": true,
+          "explanation": "A cada INSERT ou UPDATE o banco também atualiza os índices; crie só os necessários."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Complete a entidade TypeORM",
+          "code": "@___('alunos')\nexport class Aluno {\n  @PrimaryGeneratedColumn('uuid')\n  id: string;\n\n  @___({ unique: true })\n  email: string;\n}",
+          "options": [
+            "Entity",
+            "Column",
+            "Table",
+            "Field"
+          ],
+          "answer": [
+            "Entity",
+            "Column"
+          ],
+          "explanation": "@Entity mapeia a classe para a tabela e @Column mapeia cada coluna."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "Em Aluno há o código abaixo. O que vai em Curso?",
+          "code": "@ManyToOne(() => Curso, (c) => c.alunos)\ncurso: Curso;",
+          "options": [
+            "@OneToMany(() => Aluno, (a) => a.curso)",
+            "@ManyToOne(() => Aluno)",
+            "@OneToOne(() => Aluno)",
+            "@ManyToMany(() => Aluno)"
+          ],
+          "answer": 0,
+          "explanation": "ManyToOne e OneToMany são os dois lados de 1:N; a chave estrangeira fica no lado ManyToOne."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue o recurso do TypeORM ao papel",
+          "pairs": [
+            [
+              "migration",
+              "Mudança versionada do schema"
+            ],
+            [
+              "synchronize: true",
+              "Ajusta o schema sozinho, só em dev"
+            ],
+            [
+              "Repository",
+              "Operações CRUD da entidade"
+            ],
+            [
+              "@Index()",
+              "Cria índice na coluna"
+            ]
+          ],
+          "explanation": "Em produção, use migrations e deixe synchronize desligado para não perder dados."
+        },
+        {
+          "type": "order",
+          "prompt": "Crie um índice no e-mail dos alunos",
+          "tokens": [
+            "CREATE INDEX",
+            "idx_alunos_email",
+            "ON",
+            "alunos",
+            "(email)",
+            ";",
+            "PRIMARY"
+          ],
+          "answer": [
+            "CREATE INDEX",
+            "idx_alunos_email",
+            "ON",
+            "alunos",
+            "(email)",
+            ";"
+          ],
+          "explanation": "CREATE INDEX nome ON tabela (coluna) cria um índice B-tree por padrão."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Qual método do Repository busca um registro com { where: { id } }?",
+          "answer": [
+            "findOne",
+            "findOne()",
+            "repository.findOne",
+            "repo.findOne"
+          ],
+          "explanation": "findOne({ where }) retorna a entidade ou null; findOneBy recebe o filtro direto."
+        }
+      ]
+    }
+  ]
+}

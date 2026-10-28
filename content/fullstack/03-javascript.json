@@ -1,0 +1,582 @@
+{
+  "slug": "javascript",
+  "title": "JavaScript",
+  "description": "Dê vida às páginas com lógica",
+  "color": "#F0B400",
+  "icon": "curlybraces",
+  "lessons": [
+    {
+      "slug": "javascript-1-variaveis",
+      "title": "Variáveis e tipos",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "multiple_choice",
+          "prompt": "Qual declaração NÃO permite reatribuir a variável?",
+          "options": [
+            "const",
+            "let",
+            "var",
+            "static"
+          ],
+          "answer": 0,
+          "explanation": "const impede reatribuir; let e var permitem."
+        },
+        {
+          "type": "true_false",
+          "prompt": "typeof null retorna \"object\".",
+          "answer": true,
+          "explanation": "É um bug histórico do JavaScript: typeof null é \"object\", mesmo null sendo primitivo."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "O que aparece no console?",
+          "code": "console.log(2 + \"2\");",
+          "options": [
+            "\"22\"",
+            "4",
+            "NaN",
+            "Erro"
+          ],
+          "answer": 0,
+          "explanation": "Com uma string no +, o JS concatena: 2 vira \"2\" e o resultado é \"22\"."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue a expressão ao resultado",
+          "pairs": [
+            [
+              "typeof 42",
+              "\"number\""
+            ],
+            [
+              "typeof \"oi\"",
+              "\"string\""
+            ],
+            [
+              "typeof true",
+              "\"boolean\""
+            ],
+            [
+              "typeof undefined",
+              "\"undefined\""
+            ],
+            [
+              "typeof []",
+              "\"object\""
+            ]
+          ],
+          "explanation": "Arrays são objetos em JS; para testá-los use Array.isArray."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Use const para o que não muda e let para o que muda",
+          "code": "___ nome = \"Spark\";\n___ xp = 0;\nxp = xp + 10;",
+          "options": [
+            "const",
+            "let",
+            "constant",
+            "variable"
+          ],
+          "answer": [
+            "const",
+            "let"
+          ],
+          "explanation": "xp é reatribuído, então precisa de let; nome nunca muda, então const."
+        },
+        {
+          "type": "order",
+          "prompt": "Monte uma template string",
+          "tokens": [
+            "const",
+            "msg",
+            "=",
+            "`Olá, ${nome}!`",
+            ";",
+            "\"Olá, ${nome}!\""
+          ],
+          "answer": [
+            "const",
+            "msg",
+            "=",
+            "`Olá, ${nome}!`",
+            ";"
+          ],
+          "explanation": "Interpolação com ${} só funciona entre crases, não entre aspas."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Qual operador compara valor E tipo, sem conversão?",
+          "answer": [
+            "==="
+          ],
+          "explanation": "=== é a igualdade estrita; == converte tipos antes e causa surpresas como 0 == \"\"."
+        }
+      ]
+    },
+    {
+      "slug": "javascript-2-funcoes",
+      "title": "Funções e arrow",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "multiple_choice",
+          "prompt": "O que aparece no console?",
+          "code": "const dobro = n => n * 2;\nconsole.log(dobro(5));",
+          "options": [
+            "10",
+            "25",
+            "\"55\"",
+            "undefined"
+          ],
+          "answer": 0,
+          "explanation": "A arrow sem chaves retorna n * 2 direto, então dobro(5) é 10."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Complete a função e a arrow equivalente",
+          "code": "function soma(a, b) {\n  ___ a + b;\n}\nconst soma2 = (a, b) ___ a + b;",
+          "options": [
+            "return",
+            "=>",
+            "->",
+            "yield",
+            "=="
+          ],
+          "answer": [
+            "return",
+            "=>"
+          ],
+          "explanation": "Funções com chaves precisam de return; a arrow de uma expressão retorna sozinha."
+        },
+        {
+          "type": "true_false",
+          "prompt": "Uma arrow function com chaves { } retorna o valor sem precisar de return.",
+          "answer": false,
+          "explanation": "Com chaves, o corpo é um bloco e precisa de return; sem ele, retorna undefined."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue a sintaxe ao conceito",
+          "pairs": [
+            [
+              "function f() {}",
+              "Declaração (sofre hoisting)"
+            ],
+            [
+              "const f = () => {}",
+              "Arrow function"
+            ],
+            [
+              "(a = 1) => a",
+              "Parâmetro com valor padrão"
+            ],
+            [
+              "(...nums) => nums",
+              "Rest parameters"
+            ]
+          ],
+          "explanation": "Declarações de função podem ser chamadas antes da linha onde aparecem; arrows em const, não."
+        },
+        {
+          "type": "order",
+          "prompt": "Monte uma arrow que eleva x ao quadrado",
+          "tokens": [
+            "const",
+            "quadrado",
+            "=",
+            "x",
+            "=>",
+            "x * x",
+            ";",
+            "return"
+          ],
+          "answer": [
+            "const",
+            "quadrado",
+            "=",
+            "x",
+            "=>",
+            "x * x",
+            ";"
+          ],
+          "explanation": "Com um único parâmetro e uma única expressão, a arrow dispensa parênteses e return."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "O que saudar() retorna?",
+          "code": "function saudar(nome = \"dev\") {\n  return `Oi, ${nome}`;\n}\nsaudar();",
+          "options": [
+            "\"Oi, dev\"",
+            "\"Oi, undefined\"",
+            "\"Oi, \"",
+            "Erro"
+          ],
+          "answer": 0,
+          "explanation": "Sem argumento, o parâmetro assume o valor padrão \"dev\"."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Que valor uma função retorna quando não tem return?",
+          "answer": [
+            "undefined"
+          ],
+          "explanation": "Toda função JS retorna algo; sem return, o resultado é undefined."
+        }
+      ]
+    },
+    {
+      "slug": "javascript-3-arrays-objetos",
+      "title": "Arrays e objetos",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "match",
+          "prompt": "Ligue o método de array ao que ele faz",
+          "pairs": [
+            [
+              "map",
+              "Transforma cada item"
+            ],
+            [
+              "filter",
+              "Mantém os que passam no teste"
+            ],
+            [
+              "reduce",
+              "Acumula em um único valor"
+            ],
+            [
+              "find",
+              "Primeiro item que passa"
+            ],
+            [
+              "forEach",
+              "Só percorre, retorna undefined"
+            ]
+          ],
+          "explanation": "map, filter e reduce devolvem valores novos sem alterar o array original."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "Qual o valor de r?",
+          "code": "const n = [1, 2, 3, 4];\nconst r = n.filter(x => x % 2 === 0);",
+          "options": [
+            "[2, 4]",
+            "[1, 3]",
+            "[false, true, false, true]",
+            "2"
+          ],
+          "answer": 0,
+          "explanation": "filter mantém os itens em que a função retorna true, aqui os pares."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Some todos os preços",
+          "code": "const precos = [10, 20, 30];\nconst total = precos.___(\n  (acc, p) => acc + p, ___\n);",
+          "options": [
+            "reduce",
+            "map",
+            "0",
+            "[]",
+            "sum"
+          ],
+          "answer": [
+            "reduce",
+            "0"
+          ],
+          "explanation": "reduce recebe a função acumuladora e o valor inicial, aqui 0; o resultado é 60."
+        },
+        {
+          "type": "true_false",
+          "prompt": "map altera o array original.",
+          "answer": false,
+          "explanation": "map cria e retorna um array novo; o original fica intacto."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Extraia nome e xp do objeto com destructuring",
+          "code": "const user = { nome: \"Ana\", xp: 120 };\nconst ___ nome, xp ___ = user;",
+          "options": [
+            "{",
+            "}",
+            "[",
+            "]",
+            "("
+          ],
+          "answer": [
+            "{",
+            "}"
+          ],
+          "explanation": "Objetos são desestruturados com chaves { }; arrays usam colchetes [ ]."
+        },
+        {
+          "type": "order",
+          "prompt": "Crie uma cópia de user com xp atualizado",
+          "tokens": [
+            "const",
+            "novo",
+            "=",
+            "{",
+            "...user,",
+            "xp: 200",
+            "}",
+            "["
+          ],
+          "answer": [
+            "const",
+            "novo",
+            "=",
+            "{",
+            "...user,",
+            "xp: 200",
+            "}"
+          ],
+          "explanation": "O spread copia as propriedades; o que vem depois sobrescreve, então xp vira 200."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Qual método de array diz se um valor está presente (true/false)?",
+          "code": "[1, 2].___(2); // true",
+          "answer": [
+            "includes",
+            "includes()"
+          ],
+          "explanation": "[1, 2].includes(2) retorna true."
+        }
+      ]
+    },
+    {
+      "slug": "javascript-4-dom-eventos",
+      "title": "DOM e eventos",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "multiple_choice",
+          "prompt": "Qual método retorna o PRIMEIRO elemento que casa com um seletor CSS?",
+          "options": [
+            "document.querySelector",
+            "document.querySelectorAll",
+            "document.getElementsByClassName",
+            "document.find"
+          ],
+          "answer": 0,
+          "explanation": "querySelector devolve o primeiro elemento (ou null); querySelectorAll devolve uma NodeList."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Reaja ao clique no botão",
+          "code": "const btn = document.querySelector(\"#salvar\");\nbtn.___(\"click\", () => {\n  alert(\"Salvo!\");\n});",
+          "options": [
+            "addEventListener",
+            "onClick",
+            "listen",
+            "addEvent"
+          ],
+          "answer": [
+            "addEventListener"
+          ],
+          "explanation": "addEventListener(tipo, função) registra um ouvinte de evento no elemento."
+        },
+        {
+          "type": "true_false",
+          "prompt": "textContent interpreta tags HTML na string; innerHTML não.",
+          "answer": false,
+          "explanation": "É o contrário: innerHTML interpreta HTML, e textContent trata tudo como texto (mais seguro)."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue o evento ao momento em que dispara",
+          "pairs": [
+            [
+              "click",
+              "Clique no elemento"
+            ],
+            [
+              "input",
+              "Valor do campo mudou"
+            ],
+            [
+              "submit",
+              "Envio do formulário"
+            ],
+            [
+              "keydown",
+              "Tecla pressionada"
+            ],
+            [
+              "DOMContentLoaded",
+              "HTML carregado e analisado"
+            ]
+          ],
+          "explanation": "Escolher o evento certo evita gambiarras, como ouvir click num formulário."
+        },
+        {
+          "type": "order",
+          "prompt": "Adicione a classe ativo ao elemento",
+          "tokens": [
+            "el",
+            ".classList",
+            ".add(",
+            "\"ativo\"",
+            ")",
+            ";",
+            ".className"
+          ],
+          "answer": [
+            "el",
+            ".classList",
+            ".add(",
+            "\"ativo\"",
+            ")",
+            ";"
+          ],
+          "explanation": "classList.add inclui a classe sem apagar as outras, ao contrário de sobrescrever className."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Qual método do evento impede o recarregamento da página no submit?",
+          "code": "form.addEventListener(\"submit\", e => {\n  e.___();\n});",
+          "answer": [
+            "preventDefault",
+            "preventDefault()",
+            "e.preventDefault()",
+            "e.preventDefault"
+          ],
+          "explanation": "preventDefault cancela a ação padrão do navegador, como enviar o form e recarregar."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "Qual método coloca o li no final da lista?",
+          "code": "const li = document.createElement(\"li\");\nli.textContent = \"Novo\";\nlista.???(li);",
+          "options": [
+            "appendChild",
+            "insertFirst",
+            "push",
+            "add"
+          ],
+          "answer": 0,
+          "explanation": "appendChild insere o nó como último filho; push é de arrays, não de elementos."
+        }
+      ]
+    },
+    {
+      "slug": "javascript-5-async",
+      "title": "Async e fetch",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "multiple_choice",
+          "prompt": "Quais são os estados de uma Promise?",
+          "options": [
+            "pending, fulfilled, rejected",
+            "start, running, done",
+            "waiting, ok, error",
+            "open, closed"
+          ],
+          "answer": 0,
+          "explanation": "Uma Promise começa pending e termina fulfilled (sucesso) ou rejected (erro)."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Busque os cursos da API",
+          "code": "___ function carregar() {\n  const res = ___ fetch(\"/api/cursos\");\n  return res.json();\n}",
+          "options": [
+            "async",
+            "await",
+            "then",
+            "sync",
+            "promise"
+          ],
+          "answer": [
+            "async",
+            "await"
+          ],
+          "explanation": "async marca a função como assíncrona e await espera a Promise do fetch resolver."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "Em que ordem os logs aparecem?",
+          "code": "console.log(\"A\");\nsetTimeout(() => console.log(\"B\"), 0);\nPromise.resolve().then(() => console.log(\"C\"));\nconsole.log(\"D\");",
+          "options": [
+            "A D C B",
+            "A B C D",
+            "A D B C",
+            "A C D B"
+          ],
+          "answer": 0,
+          "explanation": "Primeiro o código síncrono (A, D), depois as microtasks (Promise: C) e por último o setTimeout (B)."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue o método ao papel",
+          "pairs": [
+            [
+              ".then()",
+              "Roda quando resolve"
+            ],
+            [
+              ".catch()",
+              "Trata o erro"
+            ],
+            [
+              ".finally()",
+              "Roda nos dois casos"
+            ],
+            [
+              "Promise.all()",
+              "Espera todas as Promises"
+            ],
+            [
+              "res.json()",
+              "Lê o corpo como JSON"
+            ]
+          ],
+          "explanation": "Encadear then/catch/finally é a alternativa ao async/await com try/catch."
+        },
+        {
+          "type": "order",
+          "prompt": "Trate o erro ao salvar",
+          "tokens": [
+            "try",
+            "{",
+            "await salvar();",
+            "}",
+            "catch (e)",
+            "{",
+            "mostrarErro(e);",
+            "}",
+            "finally"
+          ],
+          "answer": [
+            "try",
+            "{",
+            "await salvar();",
+            "}",
+            "catch (e)",
+            "{",
+            "mostrarErro(e);",
+            "}"
+          ],
+          "explanation": "Com async/await, erros de Promises rejeitadas são capturados por try/catch."
+        },
+        {
+          "type": "true_false",
+          "prompt": "fetch rejeita a Promise quando o servidor responde 404.",
+          "answer": false,
+          "explanation": "fetch só rejeita em falha de rede; para 404 ou 500 é preciso checar res.ok."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Qual propriedade da resposta é true para status 200 a 299?",
+          "code": "const res = await fetch(url);\nif (!res.___) throw new Error(\"Falhou\");",
+          "answer": [
+            "ok",
+            "res.ok"
+          ],
+          "explanation": "res.ok resume se o status é de sucesso (2xx)."
+        }
+      ]
+    }
+  ]
+}

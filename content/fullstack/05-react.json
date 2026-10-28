@@ -1,0 +1,534 @@
+{
+  "slug": "react",
+  "title": "React",
+  "description": "Interfaces com componentes e hooks",
+  "color": "#149ECA",
+  "icon": "atom",
+  "lessons": [
+    {
+      "slug": "react-1-componentes",
+      "title": "Componentes e JSX",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "multiple_choice",
+          "prompt": "O que um componente React retorna?",
+          "options": [
+            "JSX descrevendo a interface",
+            "Um arquivo HTML completo",
+            "Uma folha de estilo CSS",
+            "Uma instância de classe obrigatória"
+          ],
+          "answer": 0,
+          "explanation": "Componentes são funções que retornam JSX, uma descrição do que deve aparecer na tela."
+        },
+        {
+          "type": "true_false",
+          "prompt": "Nomes de componentes devem começar com letra maiúscula.",
+          "answer": true,
+          "explanation": "Com letra minúscula, o JSX trata <botao> como uma tag HTML nativa, não como seu componente."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Complete o componente",
+          "code": "function ___() {\n  ___ <h1>Olá, Spark!</h1>;\n}\n\n<Saudacao />",
+          "options": [
+            "Saudacao",
+            "return",
+            "saudacao",
+            "render"
+          ],
+          "answer": [
+            "Saudacao",
+            "return"
+          ],
+          "explanation": "O nome da função é o nome usado na tag, e ela precisa retornar o JSX."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "Qual atributo aplica uma classe CSS em JSX?",
+          "options": [
+            "class",
+            "className",
+            "cssClass",
+            "styleClass"
+          ],
+          "answer": 1,
+          "explanation": "Como class é palavra reservada em JavaScript, o JSX usa className."
+        },
+        {
+          "type": "order",
+          "prompt": "Monte um componente de botão",
+          "tokens": [
+            "function",
+            "Botao()",
+            "{",
+            "return",
+            "<button>OK</button>;",
+            "}",
+            "render"
+          ],
+          "answer": [
+            "function",
+            "Botao()",
+            "{",
+            "return",
+            "<button>OK</button>;",
+            "}"
+          ],
+          "explanation": "Componentes de função são funções comuns que retornam JSX."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue o trecho de JSX ao significado",
+          "pairs": [
+            [
+              "{nome}",
+              "Insere um valor JS"
+            ],
+            [
+              "<></>",
+              "Fragment, agrupa sem div"
+            ],
+            [
+              "className",
+              "Classe CSS"
+            ],
+            [
+              "style={{ color: 'red' }}",
+              "Estilo inline em objeto"
+            ]
+          ],
+          "explanation": "Chaves abrem JavaScript dentro do JSX; style recebe um objeto, não uma string."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Qual extensão de arquivo usamos para componentes React com TypeScript?",
+          "answer": [
+            ".tsx",
+            "tsx"
+          ],
+          "explanation": "Arquivos .tsx permitem JSX junto com tipos do TypeScript."
+        }
+      ]
+    },
+    {
+      "slug": "react-2-props",
+      "title": "Props",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "multiple_choice",
+          "prompt": "O que são props?",
+          "options": [
+            "Dados passados do componente pai para o filho",
+            "Estado interno que o próprio componente altera",
+            "Estilos globais da aplicação",
+            "Rotas da aplicação"
+          ],
+          "answer": 0,
+          "explanation": "Props são as entradas de um componente, como argumentos de uma função."
+        },
+        {
+          "type": "true_false",
+          "prompt": "Um componente pode alterar diretamente as props que recebeu.",
+          "answer": false,
+          "explanation": "Props são somente leitura; para mudar algo, o pai passa um novo valor ou uma função de callback."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Receba e use a prop nome",
+          "code": "function Saudacao({ ___ }) {\n  return <p>Oi, {nome}!</p>;\n}\n\n<Saudacao ___=\"Ana\" />",
+          "options": [
+            "nome",
+            "props",
+            "this",
+            "name"
+          ],
+          "answer": [
+            "nome",
+            "nome"
+          ],
+          "explanation": "A desestruturação { nome } pega a prop com o mesmo nome usado no atributo."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "O que este código renderiza?",
+          "code": "function Card({ children }) {\n  return <div className=\"card\">{children}</div>;\n}\n\n<Card><b>Spark</b></Card>",
+          "options": [
+            "<div class=\"card\"><b>Spark</b></div>",
+            "<div class=\"card\"></div>",
+            "Um erro: children não existe",
+            "Só <b>Spark</b>, sem a div"
+          ],
+          "answer": 0,
+          "explanation": "children contém tudo o que vai entre a abertura e o fechamento da tag do componente."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue o conceito ao exemplo",
+          "pairs": [
+            [
+              "Valor padrão",
+              "{ cor = 'azul' }"
+            ],
+            [
+              "Prop numérica",
+              "idade={30}"
+            ],
+            [
+              "Prop de texto",
+              "titulo=\"Oi\""
+            ],
+            [
+              "Callback",
+              "onSalvar={salvar}"
+            ]
+          ],
+          "explanation": "Valores que não são string vão entre chaves; funções também podem ser passadas como props."
+        },
+        {
+          "type": "order",
+          "prompt": "Passe a prop idade como número",
+          "tokens": [
+            "<Perfil",
+            "idade=",
+            "{30}",
+            "/>",
+            "\"30\""
+          ],
+          "answer": [
+            "<Perfil",
+            "idade=",
+            "{30}",
+            "/>"
+          ],
+          "explanation": "Com aspas, \"30\" seria uma string; entre chaves, {30} é um número."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Qual prop especial guarda o conteúdo entre as tags do componente?",
+          "answer": [
+            "children",
+            "props.children"
+          ],
+          "explanation": "children permite criar componentes que embrulham outros, como Card e Modal."
+        }
+      ]
+    },
+    {
+      "slug": "react-3-usestate",
+      "title": "Estado com useState",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "multiple_choice",
+          "prompt": "O que useState retorna?",
+          "options": [
+            "Um par: o valor atual e a função que o atualiza",
+            "Só o valor atual",
+            "Uma Promise com o valor",
+            "Um objeto com get e set"
+          ],
+          "answer": 0,
+          "explanation": "Por isso desestruturamos: const [valor, setValor] = useState(inicial)."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Complete o contador",
+          "code": "const [cont, ___] = ___(0);\n\nreturn (\n  <button onClick={() => setCont(cont + 1)}>\n    {cont}\n  </button>\n);",
+          "options": [
+            "setCont",
+            "useState",
+            "useEffect",
+            "cont"
+          ],
+          "answer": [
+            "setCont",
+            "useState"
+          ],
+          "explanation": "useState(0) cria o estado com valor inicial 0, e setCont agenda a atualização."
+        },
+        {
+          "type": "true_false",
+          "prompt": "Chamar a função set do estado faz o componente renderizar de novo.",
+          "answer": true,
+          "explanation": "Ao atualizar o estado com um novo valor, o React renderiza o componente outra vez com esse valor."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "Como mudar só a idade, mantendo o nome?",
+          "code": "const [user, setUser] = useState({\n  nome: 'Ana',\n  idade: 20,\n});",
+          "options": [
+            "setUser({ ...user, idade: 21 })",
+            "user.idade = 21",
+            "setUser({ idade: 21 })",
+            "setUser(user.idade = 21)"
+          ],
+          "answer": 0,
+          "explanation": "O estado é imutável: copie o objeto com spread e sobrescreva o campo. setUser({ idade: 21 }) perderia o nome."
+        },
+        {
+          "type": "order",
+          "prompt": "Declare o estado aberto começando em false",
+          "tokens": [
+            "const",
+            "[aberto, setAberto]",
+            "=",
+            "useState(false);",
+            "useEffect(false);"
+          ],
+          "answer": [
+            "const",
+            "[aberto, setAberto]",
+            "=",
+            "useState(false);"
+          ],
+          "explanation": "O argumento de useState é o valor inicial do estado."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue o hook à sua função",
+          "pairs": [
+            [
+              "useState",
+              "Guardar estado"
+            ],
+            [
+              "useEffect",
+              "Sincronizar com algo externo"
+            ],
+            [
+              "useRef",
+              "Valor que não re-renderiza"
+            ],
+            [
+              "useMemo",
+              "Memorizar um cálculo"
+            ]
+          ],
+          "explanation": "Cada hook resolve um problema diferente; useState é o mais usado para dados que mudam a tela."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Com qual prefixo começa o nome de todo hook do React?",
+          "answer": [
+            "use"
+          ],
+          "explanation": "Hooks começam com use (useState, useEffect...), inclusive os hooks que você mesmo cria."
+        }
+      ]
+    },
+    {
+      "slug": "react-4-listas",
+      "title": "Listas e condicionais",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "multiple_choice",
+          "prompt": "Qual método usamos para renderizar um array como lista?",
+          "options": [
+            "map",
+            "forEach",
+            "reduce",
+            "for...in"
+          ],
+          "answer": 0,
+          "explanation": "map devolve um novo array de elementos JSX; forEach devolve undefined e não renderiza nada."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Renderize as tarefas",
+          "code": "<ul>\n  {tarefas.___(t => (\n    <li ___={t.id}>{t.titulo}</li>\n  ))}\n</ul>",
+          "options": [
+            "map",
+            "key",
+            "forEach",
+            "id"
+          ],
+          "answer": [
+            "map",
+            "key"
+          ],
+          "explanation": "Cada item precisa de uma key estável e única entre irmãos, como o id."
+        },
+        {
+          "type": "true_false",
+          "prompt": "Usar o índice do array como key é sempre a melhor escolha.",
+          "answer": false,
+          "explanation": "O índice quebra quando a lista é reordenada ou itens entram e saem; prefira um id estável."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "Se itens for [], o que aparece na tela?",
+          "code": "{itens.length && <Lista itens={itens} />}",
+          "options": [
+            "0",
+            "Nada",
+            "Uma lista vazia",
+            "Um erro"
+          ],
+          "answer": 0,
+          "explanation": "Com array vazio, a expressão vira 0 e o React renderiza números. Prefira itens.length > 0 && <Lista />."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue a técnica ao efeito",
+          "pairs": [
+            [
+              "cond && <A />",
+              "Mostra A só se verdadeiro"
+            ],
+            [
+              "cond ? <A /> : <B />",
+              "Escolhe entre A e B"
+            ],
+            [
+              "return null",
+              "Não renderiza nada"
+            ],
+            [
+              "if antes do return",
+              "Retorno antecipado"
+            ]
+          ],
+          "explanation": "Renderização condicional é JavaScript comum: &&, ternário ou if."
+        },
+        {
+          "type": "order",
+          "prompt": "Mostre Sair se logado, senão Entrar",
+          "tokens": [
+            "{logado",
+            "?",
+            "<Sair />",
+            ":",
+            "<Entrar />}",
+            "&&"
+          ],
+          "answer": [
+            "{logado",
+            "?",
+            "<Sair />",
+            ":",
+            "<Entrar />}"
+          ],
+          "explanation": "O ternário condição ? A : B escolhe entre dois elementos."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Qual prop o React exige em cada item de uma lista?",
+          "answer": [
+            "key"
+          ],
+          "explanation": "A key ajuda o React a saber qual item mudou, entrou ou saiu entre renderizações."
+        }
+      ]
+    },
+    {
+      "slug": "react-5-efeitos",
+      "title": "Efeitos e formulários",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "multiple_choice",
+          "prompt": "Quando roda o efeito de useEffect(fn, [])?",
+          "options": [
+            "Uma vez, depois da primeira renderização",
+            "Antes de cada renderização",
+            "Depois de toda renderização",
+            "Nunca"
+          ],
+          "answer": 0,
+          "explanation": "Com array vazio ele roda após montar. Em dev, o StrictMode monta duas vezes para expor bugs."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Busque o curso quando o id mudar",
+          "code": "useEffect(() => {\n  fetch(`/api/cursos/${id}`)\n    .then(r => r.json())\n    .then(___);\n}, [___]);",
+          "options": [
+            "setCurso",
+            "id",
+            "curso",
+            "[]"
+          ],
+          "answer": [
+            "setCurso",
+            "id"
+          ],
+          "explanation": "O array de dependências lista os valores usados no efeito; quando id muda, ele roda de novo."
+        },
+        {
+          "type": "true_false",
+          "prompt": "A função retornada dentro do useEffect serve para limpeza (cleanup).",
+          "answer": true,
+          "explanation": "Ela roda antes do próximo efeito e ao desmontar: ideal para cancelar timers, inscrições e requisições."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "Qual é o problema deste código?",
+          "code": "useEffect(async () => {\n  const r = await fetch('/api/cursos');\n}, []);",
+          "options": [
+            "O efeito não pode ser async, pois retornaria uma Promise",
+            "fetch não funciona dentro do React",
+            "Faltou a prop key",
+            "Nenhum, está correto"
+          ],
+          "answer": 0,
+          "explanation": "useEffect espera undefined ou uma função de cleanup. Declare uma função async dentro do efeito e chame-a."
+        },
+        {
+          "type": "order",
+          "prompt": "Evite que o formulário recarregue a página",
+          "tokens": [
+            "function",
+            "enviar(e)",
+            "{",
+            "e.preventDefault();",
+            "}",
+            "e.stopReload();"
+          ],
+          "answer": [
+            "function",
+            "enviar(e)",
+            "{",
+            "e.preventDefault();",
+            "}"
+          ],
+          "explanation": "No onSubmit, e.preventDefault() impede o envio padrão do navegador."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue as peças do formulário controlado",
+          "pairs": [
+            [
+              "value={email}",
+              "O estado define o campo"
+            ],
+            [
+              "onChange",
+              "Avisa a cada tecla"
+            ],
+            [
+              "e.target.value",
+              "Texto digitado"
+            ],
+            [
+              "onSubmit",
+              "Envio do formulário"
+            ]
+          ],
+          "explanation": "No input controlado, o estado do React é a fonte da verdade do valor do campo."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Qual hook usamos para buscar dados quando o componente aparece na tela?",
+          "answer": [
+            "useEffect",
+            "useEffect()"
+          ],
+          "explanation": "useEffect sincroniza o componente com sistemas externos, como uma API."
+        }
+      ]
+    }
+  ]
+}

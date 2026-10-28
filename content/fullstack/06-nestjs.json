@@ -1,0 +1,537 @@
+{
+  "slug": "nestjs",
+  "title": "NestJS",
+  "description": "APIs organizadas com Node e TS",
+  "color": "#E0234E",
+  "icon": "server.rack",
+  "lessons": [
+    {
+      "slug": "nestjs-1-http",
+      "title": "HTTP, REST e npm",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "match",
+          "prompt": "Ligue o verbo HTTP à ação",
+          "pairs": [
+            [
+              "GET",
+              "Ler"
+            ],
+            [
+              "POST",
+              "Criar"
+            ],
+            [
+              "PATCH",
+              "Atualizar parte"
+            ],
+            [
+              "DELETE",
+              "Remover"
+            ]
+          ],
+          "explanation": "Em REST, o verbo diz a intenção e a URL diz qual recurso."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "Qual status HTTP indica que um recurso foi criado?",
+          "options": [
+            "200",
+            "201",
+            "204",
+            "302"
+          ],
+          "answer": 1,
+          "explanation": "201 Created é a resposta típica de um POST bem-sucedido; o Nest já usa 201 em @Post."
+        },
+        {
+          "type": "true_false",
+          "prompt": "Em REST, a URL identifica o recurso, como /usuarios/42.",
+          "answer": true,
+          "explanation": "Recursos são substantivos na URL; a ação vem do verbo HTTP."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Rode a API em modo de desenvolvimento",
+          "code": "// package.json\n\"scripts\": {\n  \"start:dev\": \"nest start ___\"\n}\n\n// terminal\nnpm ___ start:dev",
+          "options": [
+            "--watch",
+            "run",
+            "--reload",
+            "exec"
+          ],
+          "answer": [
+            "--watch",
+            "run"
+          ],
+          "explanation": "nest start --watch recompila a cada mudança; scripts do package.json rodam com npm run."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "Qual status indica \"não autenticado\"?",
+          "options": [
+            "401",
+            "403",
+            "400",
+            "500"
+          ],
+          "answer": 0,
+          "explanation": "401 é falta de credencial válida; 403 é autenticado, mas sem permissão."
+        },
+        {
+          "type": "order",
+          "prompt": "Monte a linha da requisição que busca o curso 7",
+          "tokens": [
+            "GET",
+            "/cursos/7",
+            "HTTP/1.1",
+            "POST"
+          ],
+          "answer": [
+            "GET",
+            "/cursos/7",
+            "HTTP/1.1"
+          ],
+          "explanation": "A linha de requisição tem verbo, caminho e versão do protocolo."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Qual comando instala o Nest CLI globalmente com npm?",
+          "answer": [
+            "npm i -g @nestjs/cli",
+            "npm install -g @nestjs/cli",
+            "npm i --global @nestjs/cli",
+            "npm install --global @nestjs/cli"
+          ],
+          "explanation": "Com o CLI instalado, nest new cria um projeto pronto."
+        }
+      ]
+    },
+    {
+      "slug": "nestjs-2-modulos",
+      "title": "Módulos e controllers",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "multiple_choice",
+          "prompt": "Qual a responsabilidade de um controller?",
+          "options": [
+            "Receber requisições e devolver respostas",
+            "Definir as tabelas do banco",
+            "Compilar o TypeScript",
+            "Guardar o estado do front"
+          ],
+          "answer": 0,
+          "explanation": "O controller cuida das rotas e delega a regra de negócio para os services."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue o decorator ao papel",
+          "pairs": [
+            [
+              "@Module",
+              "Agrupa uma feature"
+            ],
+            [
+              "@Controller",
+              "Define um grupo de rotas"
+            ],
+            [
+              "@Injectable",
+              "Marca um provider"
+            ],
+            [
+              "@Get",
+              "Rota GET"
+            ]
+          ],
+          "explanation": "Decorators são metadados que dizem ao Nest como montar a aplicação."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Crie a rota GET /cursos",
+          "code": "@___('cursos')\nexport class CursosController {\n  @___()\n  listar() {\n    return ['React', 'NestJS'];\n  }\n}",
+          "options": [
+            "Controller",
+            "Get",
+            "Injectable",
+            "Post"
+          ],
+          "answer": [
+            "Controller",
+            "Get"
+          ],
+          "explanation": "@Controller('cursos') define o prefixo e @Get() mapeia GET /cursos para o método."
+        },
+        {
+          "type": "true_false",
+          "prompt": "A regra de negócio deve ficar preferencialmente no service, não no controller.",
+          "answer": true,
+          "explanation": "Controllers finos e services com a lógica deixam o código mais fácil de testar e reaproveitar."
+        },
+        {
+          "type": "order",
+          "prompt": "Monte o módulo de cursos",
+          "tokens": [
+            "@Module({",
+            "controllers: [CursosController],",
+            "providers: [CursosService],",
+            "})",
+            "export class CursosModule {}",
+            "@Injectable()"
+          ],
+          "answer": [
+            "@Module({",
+            "controllers: [CursosController],",
+            "providers: [CursosService],",
+            "})",
+            "export class CursosModule {}"
+          ],
+          "explanation": "O módulo registra seus controllers e providers."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "Em qual campo um módulo expõe providers para outros módulos?",
+          "options": [
+            "exports",
+            "imports",
+            "providers",
+            "controllers"
+          ],
+          "answer": 0,
+          "explanation": "Só o que está em exports pode ser injetado por módulos que importam este."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Qual comando do Nest CLI gera o módulo cursos?",
+          "answer": [
+            "nest g module cursos",
+            "nest generate module cursos",
+            "nest g mo cursos",
+            "nest generate mo cursos"
+          ],
+          "explanation": "nest g resource cursos gera módulo, controller, service e DTOs de uma vez."
+        }
+      ]
+    },
+    {
+      "slug": "nestjs-3-dtos",
+      "title": "Rotas, parâmetros e DTOs",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "multiple_choice",
+          "prompt": "Para GET /cursos/5, qual o valor de id?",
+          "code": "@Get(':id')\nbuscar(@Param('id') id: string) {\n  return id;\n}",
+          "options": [
+            "'5' (string)",
+            "5 (number)",
+            "undefined",
+            "{ id: 5 }"
+          ],
+          "answer": 0,
+          "explanation": "Parâmetros de rota chegam como string; use um pipe como ParseIntPipe para converter."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Converta o id para número",
+          "code": "@___(':id')\nbuscar(@Param('id', ___) id: number) {\n  return this.service.findOne(id);\n}",
+          "options": [
+            "Get",
+            "ParseIntPipe",
+            "Body",
+            "ValidationPipe"
+          ],
+          "answer": [
+            "Get",
+            "ParseIntPipe"
+          ],
+          "explanation": "ParseIntPipe converte e devolve 400 automaticamente se o valor não for um inteiro."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue o decorator à origem do dado",
+          "pairs": [
+            [
+              "@Param",
+              "Segmento da URL"
+            ],
+            [
+              "@Query",
+              "Query string ?pagina=2"
+            ],
+            [
+              "@Body",
+              "Corpo da requisição"
+            ],
+            [
+              "@Headers",
+              "Cabeçalhos"
+            ]
+          ],
+          "explanation": "Cada decorator extrai uma parte diferente da requisição."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Valide o DTO com class-validator",
+          "code": "export class CriarCursoDto {\n  @___()\n  @IsNotEmpty()\n  titulo: string;\n  @IsInt()\n  @___(1)\n  cargaHoraria: number;\n}",
+          "options": [
+            "IsString",
+            "Min",
+            "Max",
+            "IsEmail"
+          ],
+          "answer": [
+            "IsString",
+            "Min"
+          ],
+          "explanation": "@IsString garante texto e @Min(1) exige carga horária de pelo menos 1."
+        },
+        {
+          "type": "true_false",
+          "prompt": "Os decorators do class-validator só são aplicados se o ValidationPipe estiver ativo.",
+          "answer": true,
+          "explanation": "Ative globalmente com app.useGlobalPipes(new ValidationPipe()) no main.ts."
+        },
+        {
+          "type": "order",
+          "prompt": "Ative a validação global descartando campos extras",
+          "tokens": [
+            "app.useGlobalPipes(",
+            "new ValidationPipe(",
+            "{ whitelist: true }",
+            "));",
+            "new ClassValidator("
+          ],
+          "answer": [
+            "app.useGlobalPipes(",
+            "new ValidationPipe(",
+            "{ whitelist: true }",
+            "));"
+          ],
+          "explanation": "whitelist: true remove do body as propriedades sem decorator no DTO."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Qual status HTTP o ValidationPipe devolve para um DTO inválido?",
+          "answer": [
+            "400",
+            "400 Bad Request",
+            "Bad Request"
+          ],
+          "explanation": "Ele lança BadRequestException com a lista de mensagens de validação."
+        }
+      ]
+    },
+    {
+      "slug": "nestjs-4-di",
+      "title": "Injeção de dependência",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "multiple_choice",
+          "prompt": "O que é injeção de dependência?",
+          "options": [
+            "O framework cria e entrega o que a classe precisa",
+            "A classe faz new de tudo o que usa",
+            "Importar arquivos CSS no módulo",
+            "Inserir SQL direto na query"
+          ],
+          "answer": 0,
+          "explanation": "O container do Nest instancia os providers e os passa pelo construtor."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Injete o service no controller",
+          "code": "@___()\nexport class CursosService {}\n\n@Controller('cursos')\nexport class CursosController {\n  constructor(private readonly svc: ___) {}\n}",
+          "options": [
+            "Injectable",
+            "CursosService",
+            "Inject",
+            "Module"
+          ],
+          "answer": [
+            "Injectable",
+            "CursosService"
+          ],
+          "explanation": "O Nest usa o tipo do parâmetro do construtor para saber qual provider injetar."
+        },
+        {
+          "type": "true_false",
+          "prompt": "Por padrão, cada provider do Nest é um singleton compartilhado no app.",
+          "answer": true,
+          "explanation": "O escopo padrão é DEFAULT (singleton); escopos REQUEST e TRANSIENT existem para casos específicos."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "Erro \"Nest can't resolve dependencies of CursosController\". Causa provável?",
+          "options": [
+            "CursosService não está em providers do módulo",
+            "Faltou um @Get no controller",
+            "A porta 3000 está ocupada",
+            "O DTO não tem @IsString"
+          ],
+          "answer": 0,
+          "explanation": "O provider precisa estar em providers do módulo ou ser exportado por um módulo importado."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue o campo do @Module ao papel",
+          "pairs": [
+            [
+              "providers",
+              "Classes que o módulo cria"
+            ],
+            [
+              "imports",
+              "Módulos de que depende"
+            ],
+            [
+              "exports",
+              "O que compartilha"
+            ],
+            [
+              "controllers",
+              "Classes que recebem rotas"
+            ]
+          ],
+          "explanation": "Esses quatro campos descrevem todo o grafo de dependências do módulo."
+        },
+        {
+          "type": "order",
+          "prompt": "Monte o construtor que injeta UsersService",
+          "tokens": [
+            "constructor(",
+            "private readonly",
+            "usersService:",
+            "UsersService",
+            ") {}",
+            "new"
+          ],
+          "answer": [
+            "constructor(",
+            "private readonly",
+            "usersService:",
+            "UsersService",
+            ") {}"
+          ],
+          "explanation": "private readonly declara e atribui a propriedade direto no construtor."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Qual decorator marca uma classe como provider injetável?",
+          "answer": [
+            "@Injectable()",
+            "@Injectable",
+            "Injectable",
+            "Injectable()"
+          ],
+          "explanation": "@Injectable() permite que o Nest gerencie e injete a classe."
+        }
+      ]
+    },
+    {
+      "slug": "nestjs-5-auth",
+      "title": "Guards e JWT",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "multiple_choice",
+          "prompt": "O que um Guard decide?",
+          "options": [
+            "Se a requisição pode chegar ao handler",
+            "Como formatar a resposta",
+            "Qual tabela consultar",
+            "Em que porta a API sobe"
+          ],
+          "answer": 0,
+          "explanation": "Guards rodam antes do handler e retornam true ou false (ou lançam exceção)."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue a parte do JWT ao conteúdo",
+          "pairs": [
+            [
+              "Header",
+              "Algoritmo e tipo"
+            ],
+            [
+              "Payload",
+              "Claims como sub e exp"
+            ],
+            [
+              "Signature",
+              "Prova que não foi alterado"
+            ]
+          ],
+          "explanation": "Um JWT é header.payload.signature, cada parte em Base64URL."
+        },
+        {
+          "type": "true_false",
+          "prompt": "O payload de um JWT é criptografado e ninguém o lê sem a chave.",
+          "answer": false,
+          "explanation": "O payload é só codificado em Base64URL; a assinatura impede alteração, não leitura. Nunca coloque senhas nele."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Complete o guard",
+          "code": "@Injectable()\nexport class AuthGuard implements ___ {\n  canActivate(ctx: ExecutionContext): ___ {\n    const req = ctx.switchToHttp().getRequest();\n    return Boolean(req.headers.authorization);\n  }\n}",
+          "options": [
+            "CanActivate",
+            "boolean",
+            "PipeTransform",
+            "string"
+          ],
+          "answer": [
+            "CanActivate",
+            "boolean"
+          ],
+          "explanation": "Guards implementam CanActivate; canActivate pode retornar boolean, Promise ou Observable."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "Qual cabeçalho normalmente leva o token para a API?",
+          "options": [
+            "Authorization: Bearer <token>",
+            "X-JWT: <token>",
+            "Auth-Token <token>",
+            "Content-Type: jwt"
+          ],
+          "answer": 0,
+          "explanation": "O padrão é Authorization com o esquema Bearer seguido do token."
+        },
+        {
+          "type": "order",
+          "prompt": "Assine o token com o id do usuário",
+          "tokens": [
+            "const token =",
+            "await",
+            "this.jwtService.signAsync(",
+            "{ sub: user.id }",
+            ");",
+            "this.jwtService.decode("
+          ],
+          "answer": [
+            "const token =",
+            "await",
+            "this.jwtService.signAsync(",
+            "{ sub: user.id }",
+            ");"
+          ],
+          "explanation": "signAsync, do @nestjs/jwt, assina o payload com o segredo configurado no JwtModule."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Que status o Nest devolve quando um guard retorna false?",
+          "answer": [
+            "403",
+            "403 Forbidden",
+            "Forbidden"
+          ],
+          "explanation": "Retornar false gera ForbiddenException (403); para 401, lance UnauthorizedException."
+        }
+      ]
+    }
+  ]
+}

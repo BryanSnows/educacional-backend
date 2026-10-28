@@ -1,0 +1,47 @@
+services:
+  api:
+    container_name: educacional-backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    restart: unless-stopped
+    env_file:
+      - .env.development
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - '3010:3010'
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+  db:
+    image: postgres:16-alpine
+    container_name: educacional-db
+    restart: unless-stopped
+    env_file:
+      - .env.development
+    volumes:
+      - postgres_db_data:/var/lib/postgresql/data
+    ports:
+      - '5450:5432'
+    healthcheck:
+      test:
+        [
+          'CMD-SHELL',
+          'pg_isready -U ${DB_USERNAME:-postgres} -d ${DB_DATABASE:-educacional}',
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+volumes:
+  postgres_db_data:
+    name: educacional_db_data
+    driver: local

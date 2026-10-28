@@ -1,0 +1,526 @@
+{
+  "slug": "fullstack",
+  "title": "Fullstack",
+  "description": "Front, API e deploy juntos",
+  "color": "#58CC02",
+  "icon": "square.stack.3d.up.fill",
+  "lessons": [
+    {
+      "slug": "fullstack-1-api",
+      "title": "Front chamando a API",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "multiple_choice",
+          "prompt": "O que fetch retorna?",
+          "options": [
+            "Uma Promise de Response",
+            "O JSON já convertido",
+            "Uma string com o corpo",
+            "Um Observable"
+          ],
+          "answer": 0,
+          "explanation": "Depois é preciso chamar res.json(), que também retorna uma Promise."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Envie um novo curso para a API",
+          "code": "const res = await fetch('/api/cursos', {\n  method: '___',\n  headers: { 'Content-Type': 'application/json' },\n  body: JSON.___(novoCurso),\n});",
+          "options": [
+            "POST",
+            "stringify",
+            "GET",
+            "parse"
+          ],
+          "answer": [
+            "POST",
+            "stringify"
+          ],
+          "explanation": "O corpo precisa ser texto: JSON.stringify transforma o objeto em JSON."
+        },
+        {
+          "type": "true_false",
+          "prompt": "fetch rejeita a Promise quando a API responde 404 ou 500.",
+          "answer": false,
+          "explanation": "fetch só rejeita em falha de rede; confira res.ok. Já o axios rejeita status fora de 2xx."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "Erro de CORS no navegador. Onde se corrige?",
+          "options": [
+            "No backend, liberando a origem do front",
+            "No front, trocando fetch por axios",
+            "No banco de dados",
+            "Desativando o JavaScript"
+          ],
+          "answer": 0,
+          "explanation": "É o servidor que diz quais origens podem chamá-lo, via cabeçalhos Access-Control-Allow-*."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue o item à descrição",
+          "pairs": [
+            [
+              "fetch",
+              "API nativa do navegador"
+            ],
+            [
+              "axios",
+              "Biblioteca com interceptors"
+            ],
+            [
+              "res.ok",
+              "true se o status é 2xx"
+            ],
+            [
+              "res.json()",
+              "Lê o corpo como JSON"
+            ]
+          ],
+          "explanation": "fetch e axios fazem o mesmo trabalho com ergonomias diferentes."
+        },
+        {
+          "type": "order",
+          "prompt": "Libere o front Vite no NestJS",
+          "tokens": [
+            "app.enableCors(",
+            "{ origin:",
+            "'http://localhost:5173'",
+            "}",
+            ");",
+            "app.useCors("
+          ],
+          "answer": [
+            "app.enableCors(",
+            "{ origin:",
+            "'http://localhost:5173'",
+            "}",
+            ");"
+          ],
+          "explanation": "enableCors no main.ts permite requisições da origem informada."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "CORS é Cross-Origin Resource ___. Complete.",
+          "answer": [
+            "Sharing"
+          ],
+          "explanation": "Compartilhamento de recursos entre origens: protocolo, domínio e porta diferentes."
+        }
+      ]
+    },
+    {
+      "slug": "fullstack-2-login",
+      "title": "Login com JWT",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "order",
+          "prompt": "Ordene o fluxo de login",
+          "tokens": [
+            "Usuário envia e-mail e senha",
+            "API confere a senha e assina o JWT",
+            "Front guarda o token",
+            "Front envia o token em cada requisição",
+            "Guard da API valida o token"
+          ],
+          "answer": [
+            "Usuário envia e-mail e senha",
+            "API confere a senha e assina o JWT",
+            "Front guarda o token",
+            "Front envia o token em cada requisição",
+            "Guard da API valida o token"
+          ],
+          "explanation": "Depois do login, cada requisição se autentica sozinha pelo token."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "Como guardar a senha no banco?",
+          "options": [
+            "Hash com bcrypt ou argon2",
+            "Texto puro",
+            "Codificada em Base64",
+            "Dentro do JWT"
+          ],
+          "answer": 0,
+          "explanation": "Hash é de mão única: no login, comparamos o hash da senha digitada com o salvo."
+        },
+        {
+          "type": "true_false",
+          "prompt": "O servidor precisa guardar cada JWT no banco para conseguir validá-lo.",
+          "answer": false,
+          "explanation": "JWT é stateless: a API valida pela assinatura e pela expiração usando o segredo."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Anexe o token em toda requisição do axios",
+          "code": "api.interceptors.request.use((config) => {\n  const token = localStorage.getItem('token');\n  if (token) config.headers.___ = `___ ${token}`;\n  return config;\n});",
+          "options": [
+            "Authorization",
+            "Bearer",
+            "Token",
+            "Cookie"
+          ],
+          "answer": [
+            "Authorization",
+            "Bearer"
+          ],
+          "explanation": "O interceptor evita repetir o cabeçalho em cada chamada."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "Uma rota protegida respondeu 401. O que o front deve fazer?",
+          "options": [
+            "Limpar o token e levar ao login",
+            "Repetir a chamada sem parar",
+            "Mostrar página 404",
+            "Ignorar e seguir"
+          ],
+          "answer": 0,
+          "explanation": "401 indica token ausente, inválido ou expirado: é hora de autenticar de novo."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue o termo ao significado",
+          "pairs": [
+            [
+              "access token",
+              "Vida curta, vai em cada requisição"
+            ],
+            [
+              "refresh token",
+              "Obtém um novo access token"
+            ],
+            [
+              "exp",
+              "Quando o token expira"
+            ],
+            [
+              "sub",
+              "ID do usuário no payload"
+            ]
+          ],
+          "explanation": "Tokens de vida curta reduzem o estrago se forem vazados."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Qual palavra vem antes do token no cabeçalho Authorization?",
+          "answer": [
+            "Bearer"
+          ],
+          "explanation": "Formato: Authorization: Bearer <token>."
+        }
+      ]
+    },
+    {
+      "slug": "fullstack-3-git",
+      "title": "Git e Pull Requests",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "order",
+          "prompt": "Salve e envie suas mudanças",
+          "tokens": [
+            "git add .",
+            "git commit -m \"feat: login\"",
+            "git push",
+            "git merge"
+          ],
+          "answer": [
+            "git add .",
+            "git commit -m \"feat: login\"",
+            "git push"
+          ],
+          "explanation": "add prepara, commit registra localmente e push envia ao remoto."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "Como criar e já mudar para a branch feat/login?",
+          "options": [
+            "git switch -c feat/login",
+            "git branch feat/login --go",
+            "git commit feat/login",
+            "git push feat/login"
+          ],
+          "answer": 0,
+          "explanation": "git switch -c (ou git checkout -b) cria a branch e muda para ela."
+        },
+        {
+          "type": "true_false",
+          "prompt": "Um Pull Request serve para revisar e discutir mudanças antes do merge.",
+          "answer": true,
+          "explanation": "PRs permitem code review e checagens de CI antes de integrar na branch principal."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Traga a feat/login para a main",
+          "code": "git ___ main\ngit pull\ngit ___ feat/login",
+          "options": [
+            "switch",
+            "merge",
+            "push",
+            "commit"
+          ],
+          "answer": [
+            "switch",
+            "merge"
+          ],
+          "explanation": "Primeiro vá para a main atualizada; depois o merge traz os commits da feature."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue o comando ao que ele faz",
+          "pairs": [
+            [
+              "git status",
+              "Mostra o que mudou"
+            ],
+            [
+              "git log",
+              "Histórico de commits"
+            ],
+            [
+              "git diff",
+              "Diferenças linha a linha"
+            ],
+            [
+              "git stash",
+              "Guarda mudanças temporariamente"
+            ]
+          ],
+          "explanation": "Esses comandos ajudam a entender o estado do repositório antes de agir."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "Quando acontece um conflito de merge?",
+          "options": [
+            "As duas branches mudaram as mesmas linhas",
+            "A branch tem commits demais",
+            "O nome da branch é longo",
+            "O repositório é privado"
+          ],
+          "answer": 0,
+          "explanation": "O Git não sabe qual versão manter; você edita o arquivo, faz add e conclui o merge."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Qual arquivo lista o que o Git deve ignorar?",
+          "answer": [
+            ".gitignore",
+            "gitignore"
+          ],
+          "explanation": "node_modules, dist e .env costumam ir no .gitignore."
+        }
+      ]
+    },
+    {
+      "slug": "fullstack-4-docker",
+      "title": "Docker e Compose",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "multiple_choice",
+          "prompt": "Qual a diferença entre imagem e container?",
+          "options": [
+            "Imagem é o molde; container é ela em execução",
+            "São exatamente a mesma coisa",
+            "Container é o molde da imagem",
+            "Imagem é uma máquina virtual"
+          ],
+          "answer": 0,
+          "explanation": "De uma mesma imagem você pode subir vários containers."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Complete o Dockerfile da API",
+          "code": "___ node:22-alpine\nWORKDIR /app\nCOPY package*.json ./\nRUN npm ci\nCOPY . .\nRUN npm run build\n___ [\"node\", \"dist/main.js\"]",
+          "options": [
+            "FROM",
+            "CMD",
+            "RUN",
+            "IMAGE"
+          ],
+          "answer": [
+            "FROM",
+            "CMD"
+          ],
+          "explanation": "FROM define a imagem base e CMD o comando que roda quando o container sobe."
+        },
+        {
+          "type": "true_false",
+          "prompt": "Copiar o package.json e rodar npm ci antes do COPY . . aproveita o cache de camadas.",
+          "answer": true,
+          "explanation": "Se só o código mudou, o Docker reaproveita a camada com as dependências já instaladas."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "Dentro do container api, qual host acessa o banco?",
+          "code": "services:\n  api:\n    build: .\n    depends_on: [db]\n  db:\n    image: postgres:16",
+          "options": [
+            "db",
+            "localhost",
+            "127.0.0.1",
+            "postgres:16"
+          ],
+          "answer": 0,
+          "explanation": "No Compose, cada serviço é alcançável pelo nome na rede interna; localhost seria o próprio container."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue a opção do docker run ao efeito",
+          "pairs": [
+            [
+              "-p 3000:3000",
+              "Publica a porta"
+            ],
+            [
+              "-v dados:/var/lib/postgresql/data",
+              "Persiste dados em volume"
+            ],
+            [
+              "-e NODE_ENV=production",
+              "Define variável de ambiente"
+            ],
+            [
+              "-d",
+              "Roda em segundo plano"
+            ]
+          ],
+          "explanation": "Essas mesmas ideias aparecem no compose como ports, volumes e environment."
+        },
+        {
+          "type": "order",
+          "prompt": "Suba os serviços do compose em segundo plano",
+          "tokens": [
+            "docker",
+            "compose",
+            "up",
+            "-d",
+            "build"
+          ],
+          "answer": [
+            "docker",
+            "compose",
+            "up",
+            "-d"
+          ],
+          "explanation": "docker compose up -d sobe tudo descrito no compose.yaml sem prender o terminal."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Qual comando lista os containers em execução?",
+          "answer": [
+            "docker ps",
+            "docker container ls",
+            "docker container ps",
+            "docker compose ps"
+          ],
+          "explanation": "Use docker ps -a para ver também os containers parados."
+        }
+      ]
+    },
+    {
+      "slug": "fullstack-5-deploy",
+      "title": "Ambiente e deploy",
+      "xp": 10,
+      "exercises": [
+        {
+          "type": "multiple_choice",
+          "prompt": "Onde guardar segredos como JWT_SECRET?",
+          "options": [
+            "Em variáveis de ambiente, fora do Git",
+            "No código-fonte",
+            "No README do projeto",
+            "No código do front-end"
+          ],
+          "answer": 0,
+          "explanation": "Assim cada ambiente tem seus valores e nada sensível vai para o repositório."
+        },
+        {
+          "type": "true_false",
+          "prompt": "Variáveis VITE_* do front ficam visíveis no navegador do usuário.",
+          "answer": true,
+          "explanation": "Elas entram no bundle do JavaScript; nunca coloque segredos no front."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Leia a porta do ambiente no Node",
+          "code": "// .env\nPORT=3010\nDATABASE_URL=postgres://app:senha@db:5432/app\n\n// main.ts\nconst porta = ___.env.___ ?? 3000;",
+          "options": [
+            "process",
+            "PORT",
+            "window",
+            "import"
+          ],
+          "answer": [
+            "process",
+            "PORT"
+          ],
+          "explanation": "No Node, as variáveis ficam em process.env; o ?? define um valor padrão."
+        },
+        {
+          "type": "match",
+          "prompt": "Ligue o arquivo ou ferramenta ao papel",
+          "pairs": [
+            [
+              ".env",
+              "Valores locais, fora do Git"
+            ],
+            [
+              ".env.example",
+              "Modelo versionado sem segredos"
+            ],
+            [
+              "@nestjs/config",
+              "Lê variáveis no Nest"
+            ],
+            [
+              "import.meta.env",
+              "Variáveis no front com Vite"
+            ]
+          ],
+          "explanation": "O .env.example documenta quais variáveis o projeto precisa."
+        },
+        {
+          "type": "order",
+          "prompt": "Ordene um pipeline de deploy",
+          "tokens": [
+            "Push na branch main",
+            "CI roda testes e build",
+            "Gera a imagem Docker",
+            "Faz deploy no servidor",
+            "Confere o /health"
+          ],
+          "answer": [
+            "Push na branch main",
+            "CI roda testes e build",
+            "Gera a imagem Docker",
+            "Faz deploy no servidor",
+            "Confere o /health"
+          ],
+          "explanation": "Automatizar esse caminho torna o deploy repetível e seguro."
+        },
+        {
+          "type": "multiple_choice",
+          "prompt": "Após o deploy, a API não conecta ao banco. Primeiro passo?",
+          "options": [
+            "Ler os logs e conferir a DATABASE_URL",
+            "Apagar o banco e recriar",
+            "Refazer o front-end",
+            "Trocar de framework"
+          ],
+          "answer": 0,
+          "explanation": "Logs e variáveis de ambiente explicam a maioria das falhas logo após um deploy."
+        },
+        {
+          "type": "type_answer",
+          "prompt": "Qual arquivo de segredos locais deve estar no .gitignore?",
+          "answer": [
+            ".env"
+          ],
+          "explanation": "Se um .env vazar no Git, troque os segredos: o histórico guarda o arquivo."
+        }
+      ]
+    }
+  ]
+}

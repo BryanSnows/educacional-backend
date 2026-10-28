@@ -1,0 +1,6 @@
+{
+  "slug": "fullstack",
+  "title": "Fullstack com o Spark",
+  "description": "Do HTML ao deploy: front, back e banco, uma lição por vez.",
+  "units": ["01-html", "02-css", "03-javascript", "04-typescript", "05-react", "06-nestjs", "07-banco", "08-fullstack"]
+}
